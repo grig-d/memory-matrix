@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Memory Matrix</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="header">
+        <span>HEADER</span>
+        <div class="form-container">
+          <form id="datetimepicker">
+            <input
+              type="text"
+              id="datepicker"
+              name="deadline"
+              size="10"
+              autocomplete="off"
+              readonly
+              placeholder="date"
+            />
+            <input
+              type="text"
+              id="timepicker"
+              name="deadline"
+              size="10"
+              autocomplete="off"
+              readonly
+            />
+            <input type="submit" id="setDeadlineBtn" value="Set Deadline" />
+          </form>
+        </div>
+      </header>
+
+      <main class="content">
+        <div class="matrix--card" id="matrixCard">
+          <div class="matrix--row">
+            <div class="matrix--quad" id="1"></div>
+            <div class="matrix--quad" id="2"></div>
+            <div class="matrix--quad" id="3"></div>
+           </div>
+          <div class="matrix--row">
+            <div class="matrix--quad" id="4"></div>
+            <div class="matrix--quad" id="5"></div>
+            <div class="matrix--quad" id="6"></div>
+          </div>
+          <div class="matrix--row">
+            <div class="matrix--quad" id="7"></div>
+            <div class="matrix--quad" id="8"></div>
+            <div class="matrix--quad" id="9"></div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="footer">designed by Demydovych Hryhorii</footer>
+    </div>
+
+    <template id="matrixTemplate"> </template>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+    <script defer type="module" src="./main.js"></script>
+  </body>
+</html>

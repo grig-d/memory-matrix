@@ -1,0 +1,182 @@
+/* :root {
+  --background-primary: #f8f5eb;
+  --background-footer-primary: #1e1e31;
+  --background-footer-secondary: #292839;
+  --text-primary: #2f3149;
+  --text-secondary: #b3b3b3;
+  --text-footer: #f8f5eb;
+  --text-hover-and-contrast: #eb2227;
+  --form-footer: #4b4b5a;
+  --yellow-on-dark: #ecaa39;
+  --blue-on-dark: #2ebec7;
+}
+*/
+
+.colors {
+  background-color: #da4453; /* grapefruit-main */
+  background-color: #ed5565; /* grapefruit-light-1 */
+  background-color: #fe6676; /* grapefruit-light-2 */
+  background-color: #e9573f; /* bittersweet-main */
+  background-color: #fc6e51; /* bittersweet-light-1 */
+  background-color: #fd7f62; /* bittersweet-light-2 */
+  background-color: #f68b42; /* sunflower-main */
+  background-color: #ffce54; /* sunflower-light-1 */
+  background-color: #ffdf65; /* sunflower-light-2 */
+  background-color: #8cc152; /* grass-main */
+  background-color: #a0d468; /* grass-light-1 */
+  background-color: #b1e579; /* grass-light-2 */
+  background-color: #37bc9b; /* mint-main */
+  background-color: #48cfad; /* mint-light-1 */
+  background-color: #59dfbe; /* mint-light-2 */
+  background-color: #3bafda; /* aqua-main */
+  background-color: #4fc1e9; /* aqua-light-1 */
+  background-color: #5fd2fa; /* aqua-light-2 */
+  background-color: #4a89dc; /* blue-main */
+  background-color: #5d9cec; /* blue-light-1 */
+  background-color: #6eadfd; /* blue-light-2 */
+  background-color: #967adc; /* lavander-main */
+  background-color: #ac92ec; /* lavander-light-1 */
+  background-color: #bda3fd; /* lavander-light-2 */
+  background-color: #d770ad; /* rose-main */
+  background-color: #ec87c0; /* rose-light-1 */
+  background-color: #fd98d1; /* rose-light-2 */
+  background-color: #e6e9ed; /* light-gray-main */
+  background-color: #f5f7fa; /* light-gray-light-1 */
+  background-color: #f6f8fb; /* light-gray-light-2 */
+  background-color: #aab2bd; /* medium-gray-main */
+  background-color: #ccd1d9; /* medium-gray-light-1 */
+  background-color: #dde2ea; /* medium-gray-light-2 */
+  background-color: #434a54; /* dark-gray-main */
+  background-color: #656d78; /* dark-gray-light-1 */
+  background-color: #767e89; /* dark-gray-light-2 */
+}
+
+html {
+  box-sizing: border-box;
+  height: 100%; /* sticky footer */
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  outline: none;
+}
+
+body {
+  margin: 0;
+  background: #f5f4fa;
+}
+
+img {
+  display: block; /* margin-bottom disappears */
+  max-width: 100%; /* width isn't larger then parent */
+  height: auto; /* correct scaling */
+}
+
+.page {
+  overflow: hidden;
+  display: flex; /* sticky footer */
+  flex-direction: column; /* sticky footer */
+  min-height: 100vh; /* sticky footer */
+  /* background-color: tan; */
+}
+
+.header,
+.footer {
+  height: 80px;
+  background-color: #999;
+  color: #efefef;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  margin-bottom: 20px;
+}
+
+.footer {
+  margin-top: auto; /* sticky footer */
+}
+
+.form-container {
+  margin: 4px;
+}
+
+.content {
+  margin: auto;
+}
+
+.matrix--card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2px;
+  background-color: #ffffff;
+  box-shadow: 0 3px 14px rgb(0 0 0 / 40%);
+  margin-bottom: 20px;
+  padding: 8px;
+}
+
+.matrix--row {
+  display: flex;
+}
+
+.matrix--quad {
+  width: 40px;
+  height: 40px;
+  margin: 4px;
+  border-radius: 2px;
+  border: 1px solid #999;
+}
+
+.checked {
+  background-color: #967adc; /* lavander-main */
+}
+
+
+/* @media screen and (max-width: 480px) {
+  .value {
+    font-size: 40px;
+  }
+  .field {
+    padding: 0 7px 5px;
+    border-radius: 2px;
+  }
+  .field:not(:last-child) {
+    margin-right: 10px;
+  }
+  .label {
+    font-size: 11px;
+  }
+} */
+
+#datepicker,
+#timepicker {
+  text-align: center;
+  height: 22px;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  background-color: #efefef;
+}
+
+#datepicker:hover,
+#datepicker:focus,
+#timepicker:hover,
+#timepicker:focus,
+#setDeadlineBtn:hover,
+#setDeadlineBtn:focus,
+.deleteBtn:hover,
+.deleteBtn:focus {
+  background-color: #ddd;
+}
+
+#setDeadlineBtn {
+  width: 107px;
+  height: 22px;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+}
