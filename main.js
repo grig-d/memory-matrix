@@ -1,9 +1,9 @@
-console.log('ukr.js');
+
 
 const arr = [];
 const min = 1;
-const max = 9;
-let n = 5;
+const max = 16;
+let n = 7;
 for (let k = 0; k < n; k++) {
   let random = Math.floor(Math.random() * (max - min + 1) + min);
   while (arr.includes(random)) {
@@ -14,8 +14,8 @@ for (let k = 0; k < n; k++) {
 
 const field = {
   min: 1,
-  max: 9,
-  n: 5,
+  max: 16,
+  n: 7,
   figure: arr,
 };
 
@@ -27,6 +27,3 @@ const refs = {
 
 field.figure.forEach(el => document.getElementById(el).classList.add('checked'));
 
-// type module random color generator
-// color - file
-// random fn - file
