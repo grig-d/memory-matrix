@@ -8,9 +8,6 @@ export default [
   '#4a89dc',
   '#967adc',
   '#d770ad',
-  '#e6e9ed',
-  '#aab2bd',
-  '#434a54',
 ];
 
 // #da4453 grapefruit-main
@@ -22,6 +19,3 @@ export default [
 // #4a89dc blue-main
 // #967adc lavander-main
 // #d770ad rose-main
-// #e6e9ed light-gray-main
-// #aab2bd medium-gray-main
-// #434a54 dark-gray-main
