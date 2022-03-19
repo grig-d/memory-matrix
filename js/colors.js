@@ -1,4 +1,4 @@
-const colors = [
+export default [
   '#da4453',
   '#e9573f',
   '#f68b42',
@@ -25,5 +25,3 @@ const colors = [
 // #e6e9ed light-gray-main
 // #aab2bd medium-gray-main
 // #434a54 dark-gray-main
-
-export default colors;
