@@ -5,7 +5,7 @@ import figureBuild from './js/figureBuild.js';
 import renderField from './js/renderField.js';
 
 // current level
-let curLev = 20; // take this from UI
+let curLev = 8; // take this from UI
 
 const game = {
   level: curLev,
