@@ -1,8 +1,6 @@
 ## **Memory Matrix**
 
 <!--
-object to template
-
 // clientStorage
 // localStorage.setItem('settings', JSON.stringify(object));
 // localStorage.clear();
@@ -12,4 +10,5 @@ object to template
 
 alternative field:
 random field rotate 90 (3x8 or 8x3)
+
 -->

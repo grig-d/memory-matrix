@@ -5,13 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Memory Matrix</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Acme&family=Nunito:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./css/style.css" />
   </head>
   <body>
     <div class="page">
       <header class="header">
-        <span>HEADER</span>
-        <div class="form-container">
+        <h1 class="heading">
+          <span class="color-1">Me</span><span class="color-2">mo</span><span class="color-3">ry</span>
+          <span class="color-4">Ma</span><span class="color-5">tr</span><span class="color-6">ix</span>
+        </h1>
+        <!-- <div class="form-container">
           <form id="datetimepicker">
             <input
               type="text"
@@ -32,12 +39,16 @@
             />
             <input type="submit" id="setDeadlineBtn" value="Set Deadline" />
           </form>
-        </div>
+        </div> -->
       </header>
 
       <main class="content" id="main"></main>
 
-      <footer class="footer">designed by Demydovych Hryhorii</footer>
+      <footer class="footer">
+        <a href="https://github.com/grig-d" target="_blank">
+          designed by <span class="developer">Demydovych Hryhorii</span></a
+        >
+      </footer>
     </div>
 
     <template>
@@ -45,17 +56,10 @@
         <div class="matrix--row">
           <div class="matrix--quad" id="1"></div>
           <div class="matrix--quad" id="2"></div>
+        </div>
+        <div class="matrix--row">
           <div class="matrix--quad" id="3"></div>
-        </div>
-        <div class="matrix--row">
           <div class="matrix--quad" id="4"></div>
-          <div class="matrix--quad" id="5"></div>
-          <div class="matrix--quad" id="6"></div>
-        </div>
-        <div class="matrix--row">
-          <div class="matrix--quad" id="7"></div>
-          <div class="matrix--quad" id="8"></div>
-          <div class="matrix--quad" id="9"></div>
         </div>
       </div>
     </template>

@@ -74,31 +74,70 @@ img {
   height: auto; /* correct scaling */
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .page {
   overflow: hidden;
   display: flex; /* sticky footer */
   flex-direction: column; /* sticky footer */
   min-height: 100vh; /* sticky footer */
-  /* background-color: tan; */
 }
 
 .header,
 .footer {
-  height: 80px;
-  background-color: #999;
-  color: #efefef;
+  background-color: #fafafa;
+  color: #464646;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   justify-content: center;
   align-items: center;
+  box-shadow: 0 0px 12px rgb(0 0 0 / 30%);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
 }
 
 .header {
   margin-bottom: 20px;
+  height: 64px;
 }
 
 .footer {
+  height: 40px;
   margin-top: auto; /* sticky footer */
+}
+
+.developer {
+  font-weight: 700;
+}
+
+.heading {
+  font-family: 'Acme', sans-serif;
+  font-size: 36px;
+  margin: 0;
+  /* background-color: tan; */
+  /* width: 800px; */
+}
+
+.heading > .color-1 {
+  color: #ac92ec;
+}
+.heading > .color-2 {
+  color: #4fc1e9;
+}
+.heading > .color-3 {
+  color: #5d9cec;
+}
+.heading > .color-4 {
+  color: #ec87c0;
+}
+.heading > .color-5 {
+  color: #fc6e51;
+}
+.heading > .color-6 {
+  color: #f68b42;
 }
 
 .form-container {
@@ -116,9 +155,9 @@ img {
   align-items: center;
   border-radius: 2px;
   background-color: #ffffff;
-  box-shadow: 0 3px 14px rgb(0 0 0 / 40%);
+  box-shadow: 0 0px 16px rgb(0 0 0 / 30%);
   margin-bottom: 20px;
-  padding: 8px;
+  padding: 16px;
 }
 
 .matrix--row {
@@ -136,7 +175,6 @@ img {
 .checked {
   background-color: #967adc; /* lavander-main */
 }
-
 
 /* @media screen and (max-width: 480px) {
   .value {
@@ -180,7 +218,6 @@ img {
   border: 1px solid #ddd;
   border-radius: 2px;
 }
-
 
 /* 
   -moz-box-shadow:
