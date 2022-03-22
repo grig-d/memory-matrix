@@ -170,11 +170,11 @@ a {
   margin: 4px;
   border-radius: 2px;
   border: 1px solid #999;
+  background-color: #fff;
 }
 
-.checked {
-  background-color: #967adc; /* lavander-main */
-}
+/* .checked {
+} */
 
 /* @media screen and (max-width: 480px) {
   .value {

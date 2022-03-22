@@ -1,0 +1,12 @@
+<template>
+  <div class="matrix--card" id="matrixCard">
+    <div class="matrix--row">
+      <div class="matrix--quad" id="1"></div>
+      <div class="matrix--quad" id="2"></div>
+    </div>
+    <div class="matrix--row">
+      <div class="matrix--quad" id="3"></div>
+      <div class="matrix--quad" id="4"></div>
+    </div>
+  </div>
+</template>

@@ -4,8 +4,12 @@ import randomize from './js/randomize.js';
 import figureBuild from './js/figureBuild.js';
 import renderField from './js/renderField.js';
 
-// current level
-let curLev = 8; // take this from UI
+const ref = {
+  main: document.getElementById('main'),
+};
+// default level is 1
+// current level from UI or storage
+let curLev = 8;
 
 const game = {
   level: curLev,
@@ -18,19 +22,27 @@ const game = {
 };
 
 // console.log(game);
-// renderField(game);
 
-const ref = {
-  main: document.getElementById('main'),
-};
+drawEmptyField();
+drawFigure();
+clearFigure();
 
-ref.main.insertAdjacentHTML('beforeend', renderField(game));
+function drawEmptyField() {
+  ref.main.insertAdjacentHTML('beforeend', renderField(game));
+}
+
+function drawFigure() {
+  game.figure.forEach(el => {
+    document.getElementById(el).classList.add('checked');
+    document.getElementById(el).style.backgroundColor = game.color;
+  });
+}
+
+function clearFigure() {
+  game.figure.forEach(el => {
+    document.getElementById(el).style.backgroundColor = null;
+  });
+}
 
 // ref.main.innerHTML = ''; // переписывает всю разметку
 // element.insertAdjacentHTML('beforeend', string); // добавляет разметку
-
-game.figure.forEach(el => {
-  document.getElementById(el).classList.add('checked');
-  document.getElementById(el).style.backgroundColor = game.color;
-});
-
