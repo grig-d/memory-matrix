@@ -9,7 +9,10 @@ const ref = {
 };
 // default level is 1
 // current level from UI or storage
-let curLev = 8;
+let curLev = 1;
+
+// Difficulty hard = 400, medium = 600, easy = 800
+let msPerQuad = 600;
 
 const game = {
   level: curLev,
@@ -25,6 +28,9 @@ const game = {
 
 drawEmptyField();
 drawFigure();
+
+const timeout = setTimeout(clearFigure, game.quads * msPerQuad);
+
 // clearFigure();
 
 function drawEmptyField() {
@@ -42,7 +48,41 @@ function clearFigure() {
   game.figure.forEach(el => {
     document.getElementById(el).style.backgroundColor = null;
   });
+  stopTimeout();
+  startClicking();
 }
 
 // ref.main.innerHTML = ''; // переписывает всю разметку
 // element.insertAdjacentHTML('beforeend', string); // добавляет разметку
+
+function stopTimeout() {
+  clearTimeout(timeout);
+}
+
+function startClicking() {
+  console.log('start clicking');
+}
+
+// // // //
+
+let clicksCount = 0;
+ref.main.addEventListener('click', function (e) {
+  clicksCount++;
+  if (clicksCount === game.quads) {
+    console.log('STOP');
+  }
+  console.log(
+    clicksCount,
+    e.target.id,
+    e.target.classList.contains('matrix--quad'),
+  );
+  if (e.target.classList.contains('checked')) {
+    console.log('checked');
+    e.target.classList.add('marked');
+  } else {
+    console.log('wrong');
+  }
+});
+
+// removeEventListener
+// remove class 'marked'

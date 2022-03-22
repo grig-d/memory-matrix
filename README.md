@@ -11,4 +11,5 @@
 alternative field:
 random field rotate 90 (3x8 or 8x3)
 
+Difficulty ms 400 600 800
 -->

@@ -180,6 +180,10 @@ a {
   background-color: #fff;
 }
 
+.marked {
+  background-color: red;
+}
+
 /* .checked {
 } */
 
