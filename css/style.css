@@ -148,6 +148,13 @@ a {
   margin: 40px auto auto;
 }
 
+.interface {
+  width: 200px;
+  margin: 0 auto 20px auto;
+  display: flex;
+  justify-content: space-between;
+}
+
 .matrix--card {
   display: flex;
   flex-direction: column;
@@ -224,3 +231,10 @@ a {
   -webkit-box-shadow:
   box-shadow:
 */
+
+.unselectable {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

@@ -25,7 +25,7 @@ const game = {
 
 drawEmptyField();
 drawFigure();
-clearFigure();
+// clearFigure();
 
 function drawEmptyField() {
   ref.main.insertAdjacentHTML('beforeend', renderField(game));
