@@ -155,7 +155,7 @@ a {
   justify-content: space-between;
 }
 
-.matrix--card {
+.card {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -167,11 +167,11 @@ a {
   padding: 16px;
 }
 
-.matrix--row {
+.row {
   display: flex;
 }
 
-.matrix--quad {
+.quad {
   width: 40px;
   height: 40px;
   margin: 4px;
@@ -180,12 +180,9 @@ a {
   background-color: #fff;
 }
 
-.marked {
+.clicked {
   background-color: red;
 }
-
-/* .checked {
-} */
 
 /* @media screen and (max-width: 480px) {
   .value {

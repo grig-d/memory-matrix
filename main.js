@@ -12,7 +12,9 @@ const ref = {
 let curLev = 1;
 
 // Difficulty hard = 400, medium = 600, easy = 800
-let msPerQuad = 600;
+let msPerQuad = 400;
+
+let clicksCount = 0;
 
 const game = {
   level: curLev,
@@ -24,14 +26,9 @@ const game = {
   figure: figureBuild(levels[curLev - 1]),
 };
 
-// console.log(game);
-
 drawEmptyField();
 drawFigure();
-
-const timeout = setTimeout(clearFigure, game.quads * msPerQuad);
-
-// clearFigure();
+setTimeout(clearFigure, game.quads * msPerQuad);
 
 function drawEmptyField() {
   ref.main.insertAdjacentHTML('beforeend', renderField(game));
@@ -39,7 +36,7 @@ function drawEmptyField() {
 
 function drawFigure() {
   game.figure.forEach(el => {
-    document.getElementById(el).classList.add('checked');
+    document.getElementById(el).classList.add('right');
     document.getElementById(el).style.backgroundColor = game.color;
   });
 }
@@ -48,41 +45,60 @@ function clearFigure() {
   game.figure.forEach(el => {
     document.getElementById(el).style.backgroundColor = null;
   });
-  stopTimeout();
   startClicking();
 }
 
 // ref.main.innerHTML = ''; // переписывает всю разметку
 // element.insertAdjacentHTML('beforeend', string); // добавляет разметку
 
-function stopTimeout() {
-  clearTimeout(timeout);
-}
-
 function startClicking() {
-  console.log('start clicking');
+  console.log('START clicking'); // don't need this
+  ref.main.addEventListener('click', quadMarking);
 }
 
-// // // //
+function stopClicking() {
+  console.log('STOP clicking'); // don't need this
+  ref.main.removeEventListener('click', quadMarking);
+}
 
-let clicksCount = 0;
-ref.main.addEventListener('click', function (e) {
-  clicksCount++;
+function quadMarking(event) {
+  const curQuad = event.target;
+  if (
+    curQuad.classList.contains('quad') &&
+    !curQuad.classList.contains('clicked')
+  ) {
+    clicksCount++;
+    curQuad.classList.add('clicked');
+    console.log(clicksCount, 'id', curQuad.id, 'was clicked'); // don't need this
+  }
+
   if (clicksCount === game.quads) {
-    console.log('STOP');
+    stopClicking();
+    setTimeout(showResult, 500);
+    return;
   }
-  console.log(
-    clicksCount,
-    e.target.id,
-    e.target.classList.contains('matrix--quad'),
-  );
-  if (e.target.classList.contains('checked')) {
-    console.log('checked');
-    e.target.classList.add('marked');
-  } else {
-    console.log('wrong');
-  }
-});
 
-// removeEventListener
+  // // // //
+  // someFunction();
+  // if (curQuad.classList.contains('checked')) {
+  //   console.log('checked');
+  //   curQuad.classList.add('chosen');
+  // } else {
+  //   console.log('wrong'); // don't need this
+  // }
+}
+
+function showResult() {
+  console.log('RESULT');
+}
+
+// right - true quad
+// clicked - any quad that was clicked once to prevent second click count on the same quad
+
+// chosen - chosen by player
+// wrong - wrong quad
+
 // remove class 'marked'
+// block buttons when clicking
+
+// setTimeout 1sec - final
