@@ -9,7 +9,7 @@ const ref = {
 };
 // default level is 1
 // current level from UI or storage
-let curLev = 8;
+let curLev = 4;
 
 // Difficulty hard = 400, medium = 600, easy = 800
 let msPerQuad = 400;
