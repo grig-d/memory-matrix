@@ -167,6 +167,14 @@ a {
   padding: 16px;
 }
 
+.result-right {
+  box-shadow: 0 0px 20px rgba(0, 255, 0, 0.5);
+}
+
+.result-wrong {
+  box-shadow: 0 0px 20px rgba(255, 0, 0, 0.5);
+}
+
 .row {
   display: flex;
 }
@@ -180,8 +188,10 @@ a {
   background-color: #fff;
 }
 
-.clicked {
-  background-color: red;
+.result-wrong .wrong {
+  background-image: url('../images/close.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 /* @media screen and (max-width: 480px) {
