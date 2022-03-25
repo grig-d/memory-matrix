@@ -1,6 +1,11 @@
 ## **Memory Matrix**
 
 <!--
+
+cursor: none;
+
+arrow right (play next)
+
 Interface:
 next btn
 level form, decrease level, increase level
