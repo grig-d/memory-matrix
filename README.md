@@ -1,7 +1,17 @@
 ## **Memory Matrix**
 
 <!--
-// clientStorage
+Interface:
+next btn
+level form, decrease level, increase level
+
+Settings:
+Difficulty ms 400 600 800
+
+Theme:
+default light, dark, cyber
+
+Client Storage:
 // localStorage.setItem('settings', JSON.stringify(object));
 // localStorage.clear();
 // save level
@@ -11,5 +21,4 @@
 alternative field:
 random field rotate 90 (3x8 or 8x3)
 
-Difficulty ms 400 600 800
 -->
