@@ -9,7 +9,7 @@ const ref = {
 };
 // default level is 1
 // current level from UI or storage
-let curLev = 4;
+let curLev = 8;
 
 // Difficulty hard = 400, medium = 600, easy = 800
 let msPerQuad = 400;
@@ -76,19 +76,17 @@ function quadMarking(event) {
 
   if (clicksCount === game.quads) {
     stopClicking();
-    setTimeout(showResult, 200);
+    showResult();
     return;
   }
 }
 
 function showResult() {
   console.log('RESULT'); // don't need this
-  console.log(arrayClicked);
   const arrayWrong = arrayClicked.filter(
     el => !document.getElementById(el).classList.contains('right'),
   );
   if (arrayWrong.length) {
-    console.log(arrayWrong.length, 'there is wrong');
     arrayWrong.forEach(el => {
       const currentQuad = document.getElementById(el);
       currentQuad.style.backgroundColor = null;
@@ -96,25 +94,9 @@ function showResult() {
     });
     document.querySelector('.card').classList.add('result-wrong');
   } else {
-    console.log(arrayWrong.length, 'all right');
     document.querySelector('.card').classList.add('result-right');
   }
-
-  // 
   arrayClicked = [];
-  console.log(arrayClicked);
-  console.log(arrayWrong);
-  // .result-right
-  // .result-wrong .wrong
-
-  // // // //
-  // someFunction();
-  // if (curQuad.classList.contains('checked')) {
-  //   console.log('checked');
-  //   curQuad.classList.add('chosen');
-  // } else {
-  //   console.log('wrong'); // don't need this
-  // }
 }
 
 // right - true quad
