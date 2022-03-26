@@ -40,12 +40,14 @@ function drawFigure() {
     document.getElementById(el).classList.add('right');
     document.getElementById(el).style.backgroundColor = game.color;
   });
+  cursorToggle();
 }
 
 function clearFigure() {
   game.figure.forEach(el => {
     document.getElementById(el).style.backgroundColor = null;
   });
+  cursorToggle();
   startClicking();
 }
 
@@ -97,6 +99,15 @@ function showResult() {
     document.querySelector('.card').classList.add('result-right');
   }
   arrayClicked = [];
+}
+
+function cursorToggle() {
+  const element = document.getElementById('matrixCard');
+  if (!element.style.cursor) {
+    element.style.cursor = 'none';
+  } else {
+    element.style.cursor = null;
+  }
 }
 
 // right - true quad
