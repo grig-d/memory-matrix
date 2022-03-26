@@ -4,14 +4,17 @@
 
 arrow right (play next)
 
-Interface:
+// Interface
+logo
+Settings
 next btn
 level form, decrease level, increase level
 
-Settings:
-Difficulty ms 400 600 800
+// Settings
+Difficulty: hard 400ms; medium 600ms; easy 800ms;
+Cursor: anti-cheat;
 
-Theme:
+// Theme
 default light, dark, cyber
 
 Client Storage:

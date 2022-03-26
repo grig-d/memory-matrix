@@ -114,11 +114,19 @@ a {
 }
 
 .heading {
+  text-align: center;
   font-family: 'Acme', sans-serif;
   font-size: 36px;
   margin: 0;
-  /* background-color: tan; */
-  /* width: 800px; */
+  background-color: tan;
+  width: 220px;
+  width: 600px;
+}
+
+.logo {
+  width: 20px;
+  height: 20px;
+  background-color: tomato;
 }
 
 .heading > .color-1 {
