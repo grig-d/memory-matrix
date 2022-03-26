@@ -2,8 +2,6 @@
 
 <!--
 
-cursor: none;
-
 arrow right (play next)
 
 Interface:
