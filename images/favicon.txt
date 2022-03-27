@@ -1,0 +1,4 @@
+https://www.favicon.cc/
+blue	0080FF
+grey	EBEBEB
+white	FFFFFF

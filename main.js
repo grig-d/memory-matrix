@@ -6,6 +6,7 @@ import renderField from './js/renderField.js';
 
 const ref = {
   main: document.getElementById('main'),
+  next: document.getElementById('next'),
 };
 // default level is 1
 // current level from UI or storage
@@ -36,11 +37,12 @@ function drawEmptyField() {
 }
 
 function drawFigure() {
+  nextOff();
+  cursorToggle();
   game.figure.forEach(el => {
     document.getElementById(el).classList.add('right');
     document.getElementById(el).style.backgroundColor = game.color;
   });
-  cursorToggle();
 }
 
 function clearFigure() {
@@ -99,6 +101,7 @@ function showResult() {
     document.querySelector('.card').classList.add('result-right');
   }
   arrayClicked = [];
+  nextOn(); // maybe place it not here
 }
 
 function cursorToggle() {
@@ -110,9 +113,25 @@ function cursorToggle() {
   }
 }
 
-// right - true quad
-// clicked - any quad that was clicked once to prevent second click count on the same quad
-// wrong - clicked wrong quad
+function nextOn() {
+  ref.next.disabled = false;
+}
+
+function nextOff() {
+  ref.next.disabled = true;
+}
+
+function newGame() {
+  // body
+}
 
 // remove classes 'clicked' and 'right' and 'wrong' but maybe don't need this
 // block buttons when clicking
+
+/*
+DOCS:
+
+right - true quad
+clicked - any quad that was clicked once to prevent second click count on the same quad
+wrong - clicked wrong quad
+*/
