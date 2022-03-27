@@ -118,15 +118,55 @@ a {
   font-family: 'Acme', sans-serif;
   font-size: 36px;
   margin: 0;
-  background-color: tan;
-  width: 220px;
-  width: 600px;
+  /* background-color: tan; */
+  width: 308px;
 }
 
 .logo {
+  width: 46px;
+  height: 46px;
+  /* background-color: tomato; */
+  background-image: url('../images/GND.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  /* border: 2px solid #999999; */
+  /* border-radius: 50%; */
+}
+
+.settings {
+  /* margin-top: 6px; */
+  /* margin-left: 14px; */
+  /* width: 32px;
+  height: 32px; */
+  width: 46px;
+  height: 46px;
+  border: 2px solid #999999;
+  border-radius: 50%;
+  /* background-color: tomato; */
+  background-image: url('../images/cog.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  transition: transform 1s;
+}
+
+.settings:hover {
+  transform: rotate(30deg);
+}
+
+#next {
+width: 64px;
+height: 32px;
+border-radius: 16px;
+outline-style: none;
+}
+
+.arrow {
+  /* display: inline-block;
   width: 20px;
   height: 20px;
-  background-color: tomato;
+  background-image: url('../images/arrow-right-bold.svg');
+  background-repeat: no-repeat;
+  background-size: contain; */
 }
 
 .heading > .color-1 {
@@ -154,6 +194,7 @@ a {
 
 .content {
   margin: 40px auto auto;
+  text-align: center;
 }
 
 .interface {
@@ -197,7 +238,7 @@ a {
 }
 
 .result-wrong .wrong {
-  background-image: url('../images/close999.svg');
+  background-image: url('../images/close.svg');
   background-repeat: no-repeat;
   background-size: contain;
 }

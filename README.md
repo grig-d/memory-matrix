@@ -7,7 +7,7 @@ arrow right (play next)
 // Interface
 logo
 Settings
-next btn
+next btn (disappear)
 level form, decrease level, increase level
 
 // Settings
