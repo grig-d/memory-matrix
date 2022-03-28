@@ -8,15 +8,14 @@ const ref = {
   main: document.getElementById('main'),
   next: document.getElementById('next'),
 };
+
+ref.next.addEventListener('click', newGame);
 // default level is 1
 // current level from UI or storage
 let curLev = 4;
 
 // Difficulty hard = 400, medium = 600, easy = 800
 let msPerQuad = 400;
-
-let clicksCount = 0;
-let arrayClicked = [];
 
 const game = {
   level: curLev,
@@ -28,9 +27,22 @@ const game = {
   figure: figureBuild(levels[curLev - 1]),
 };
 
-drawEmptyField();
-drawFigure();
-setTimeout(clearFigure, game.quads * msPerQuad);
+let clicksCount;
+let arrayClicked;
+
+newGame();
+
+function newGame() {
+  clicksCount = 0;
+  arrayClicked = [];
+  game.color = randomize(colors);
+  game.figure = figureBuild(levels[curLev - 1]);
+  ref.main.innerHTML = '';
+  console.log('start new game');
+  drawEmptyField();
+  drawFigure();
+  setTimeout(clearFigure, game.quads * msPerQuad);
+}
 
 function drawEmptyField() {
   ref.main.insertAdjacentHTML('beforeend', renderField(game));
@@ -100,17 +112,17 @@ function showResult() {
   } else {
     document.querySelector('.card').classList.add('result-right');
   }
-  arrayClicked = [];
   nextOn(); // maybe place it not here
 }
 
 function cursorToggle() {
-  const element = document.getElementById('matrixCard');
-  if (!element.style.cursor) {
-    element.style.cursor = 'none';
-  } else {
-    element.style.cursor = null;
-  }
+  console.log('cursor anti-cheat toggle');
+  // const element = document.getElementById('matrixCard');
+  // if (!element.style.cursor) {
+  //   element.style.cursor = 'none';
+  // } else {
+  //   element.style.cursor = null;
+  // }
 }
 
 function nextOn() {
@@ -119,10 +131,6 @@ function nextOn() {
 
 function nextOff() {
   ref.next.disabled = true;
-}
-
-function newGame() {
-  // body
 }
 
 // remove classes 'clicked' and 'right' and 'wrong' but maybe don't need this

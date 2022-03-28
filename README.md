@@ -17,6 +17,11 @@ Cursor: anti-cheat;
 // Theme
 default light, dark, cyber
 
+// Size:
+small
+medium
+large
+
 Client Storage:
 // localStorage.setItem('settings', JSON.stringify(object));
 // localStorage.clear();
