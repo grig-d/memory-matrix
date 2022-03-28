@@ -1,0 +1,4 @@
+https://www.favicon.cc/
+blue	4A89DC	74,137,220
+grey	CCD1D9	204,209,217
+white	FFFFFF

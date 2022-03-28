@@ -1,8 +1,12 @@
 ## **Memory Matrix**
 
 <!--
+double click undo (toggle 'click')
 
-arrow right (play next)
+style next btn (play again)
+don't need icon arrow right - delete em all
+
+favicon new
 
 // Interface
 logo
@@ -32,4 +36,8 @@ Client Storage:
 alternative field:
 random field rotate 90 (3x8 or 8x3)
 
+-->
+
+<!-- DONE:
+favicon
 -->

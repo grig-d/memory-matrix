@@ -158,10 +158,12 @@ width: 64px;
 height: 32px;
 border-radius: 16px;
 outline-style: none;
+transition: transform 0.2s;
 }
 
 #next:hover:enabled {
-  box-shadow: 0 0px 12px rgb(0 0 0 / 30%);
+  transform: translateY(2px);
+  box-shadow: 0 0px 6px #37bc9b;
 }
 
 /* .arrow {
