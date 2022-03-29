@@ -22,9 +22,9 @@ Cursor: anti-cheat;
 default light, dark, cyber
 
 // Size:
-small
-medium
-large
+small 40x40 8 20
+medium 50x50 10 25
+large 60x60 12 20
 
 Client Storage:
 // localStorage.setItem('settings', JSON.stringify(object));

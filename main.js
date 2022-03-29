@@ -7,16 +7,26 @@ import renderField from './js/renderField.js';
 const ref = {
   main: document.getElementById('main'),
   next: document.getElementById('next'),
+  level: document.getElementById('displayLevel'),
+  decrease: document.getElementById('decreaseLevel'),
+  increase: document.getElementById('increaseLevel'),
+  min: document.getElementById('min'),
+  max: document.getElementById('max'),
 };
 
-ref.next.addEventListener('click', newGame);
 // default level is 1
 // current level from UI or storage
-let curLev = 4;
+let curLev = 8;
+ref.level.innerHTML = curLev;
+ref.min.addEventListener('click', levelMin);
+// ref.max.addEventListener('click', levelMax);
+
+ref.next.addEventListener('click', newGame);
 
 // Difficulty hard = 400, medium = 600, easy = 800
 let msPerQuad = 400;
 
+// NEED TO UPDATE game object
 const game = {
   level: curLev,
   width: levels[curLev - 1].width,
@@ -31,6 +41,16 @@ let clicksCount;
 let arrayClicked;
 
 newGame();
+
+// FUNCTIONS //
+
+function levelMin() {
+  curLev = 1;
+  game.level = curLev;
+  ref.level.innerHTML = curLev;
+  console.log(game);
+  // NEED TO UPDATE game object
+}
 
 function newGame() {
   clicksCount = 0;
