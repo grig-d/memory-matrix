@@ -16,8 +16,12 @@ const ref = {
 
 // default level is 1
 // current level from UI or storage
-let curLev = 8;
+
+//////////////////////////////////////////////////////////////////////////
+let curLev = 3;
+
 ref.level.innerHTML = curLev;
+
 ref.min.addEventListener('click', levelMin);
 // ref.max.addEventListener('click', levelMax);
 
@@ -27,6 +31,9 @@ ref.next.addEventListener('click', newGame);
 let msPerQuad = 400;
 
 // NEED TO UPDATE game object
+function updateGameObj() {
+  // body
+}
 const game = {
   level: curLev,
   width: levels[curLev - 1].width,
@@ -37,6 +44,8 @@ const game = {
   figure: figureBuild(levels[curLev - 1]),
 };
 
+/////////////////////////////////////////////////////////////////////////////
+
 let clicksCount;
 let arrayClicked;
 
@@ -45,7 +54,7 @@ newGame();
 // FUNCTIONS //
 
 function levelMin() {
-  curLev = 1;
+  curLev = 1; //////////////////////// take it from level array[0]
   game.level = curLev;
   ref.level.innerHTML = curLev;
   console.log(game);
