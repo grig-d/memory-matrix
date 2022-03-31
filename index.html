@@ -16,7 +16,9 @@
     <div class="page">
       <header class="header">
         <div class="logo">
-          <a href="./index.html"><img src="./images/memory_matrix_32_logo.png" alt="" /></a>
+          <a href="./index.html"
+            ><img src="./images/memory_matrix_32_logo.png" alt=""
+          /></a>
         </div>
         <h1 class="heading unselectable">
           <span class="color-1">Me</span><span class="color-2">mo</span
@@ -50,16 +52,15 @@
 
       <main class="content">
         <div class="interface">
-          <button type="button" id="min">min</button>
-          <button type="button" id="decreaseLevel">-</button>
+          <button type="button" id="min" disabled>min</button>
+          <button type="button" id="decreaseLevel" disabled>-</button>
           <div id="displayLevel"></div>
-          <button type="button" id="increaseLevel">+</button>
-          <button type="button" id="max">max</button>
+          <button type="button" id="increaseLevel" disabled>+</button>
+          <button type="button" id="max" disabled>max</button>
         </div>
+        <div class="status-bar"></div>
         <div id="main"></div>
-        <button type="button" id="next" disabled>
-          next <span class="arrow"></span>
-        </button>
+        <button type="button" id="next" disabled>next</button>
       </main>
 
       <footer class="footer">

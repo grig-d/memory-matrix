@@ -96,6 +96,7 @@ a {
   justify-content: center;
   align-items: center;
   box-shadow: 0 0px 12px rgb(0 0 0 / 30%);
+  font-size: 16px;
   font-family: 'Nunito', sans-serif;
   font-weight: 400;
 }
@@ -199,11 +200,37 @@ a {
 }
 
 .interface {
-  width: 200px;
+  width: 176px;
   margin: 0 auto 20px auto;
   display: flex;
   justify-content: space-between;
 }
+
+#displayLevel {
+  display: flex;
+  width: 32px;
+  height: 32px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  /* border-radius: 2px; */
+  border: 1px solid #767676;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+  /* background-color: tan; */
+  font-size: 16px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
+}
+
+/* 
+#decreaseLevel;
+#increaseLevel;
+#min;
+#max;
+*/
 
 .card {
   display: flex;
@@ -212,17 +239,17 @@ a {
   align-items: center;
   border-radius: 2px;
   background-color: #ffffff;
-  box-shadow: 0 0px 16px rgb(0 0 0 / 30%);
+  box-shadow: 0 0px 8px rgb(0 0 0 / 30%);
   margin-bottom: 20px;
   padding: 16px;
 }
 
 .result-right {
-  box-shadow: 0 0px 20px rgba(0, 255, 0, 0.5);
+  box-shadow: 0 0px 12px rgba(0, 255, 0, 0.5);
 }
 
 .result-wrong {
-  box-shadow: 0 0px 20px rgba(255, 0, 0, 0.5);
+  box-shadow: 0 0px 12px rgba(255, 0, 0, 0.5);
 }
 
 .row {
@@ -237,6 +264,12 @@ a {
   border: 1px solid #767676;
   background-color: #fff;
 }
+
+/* .result-right .right {
+  background-image: url('../images/check.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+} */
 
 .result-wrong .wrong {
   background-image: url('../images/close.svg');

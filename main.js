@@ -14,37 +14,27 @@ const ref = {
   max: document.getElementById('max'),
 };
 
-// default level is 1
-// current level from UI or storage
+let curLev = localStorage.getItem('level')
+  ? JSON.parse(localStorage.getItem('level'))
+  : 1;
 
-//////////////////////////////////////////////////////////////////////////
-let curLev = 3;
+storageLevel();
 
 ref.level.innerHTML = curLev;
 
 ref.min.addEventListener('click', levelMin);
-// ref.max.addEventListener('click', levelMax);
-
+ref.max.addEventListener('click', levelMax);
+ref.decrease.addEventListener('click', levelDecrease);
+ref.increase.addEventListener('click', levelIncrease);
 ref.next.addEventListener('click', newGame);
 
 // Difficulty hard = 400, medium = 600, easy = 800
 let msPerQuad = 400;
 
-// NEED TO UPDATE game object
-function updateGameObj() {
-  // body
-}
-const game = {
-  level: curLev,
-  width: levels[curLev - 1].width,
-  height: levels[curLev - 1].height,
-  quads: levels[curLev - 1].quads,
-  size: levels[curLev - 1].width * levels[curLev - 1].height,
-  color: randomize(colors),
-  figure: figureBuild(levels[curLev - 1]),
-};
+let game;
+updateGameObj();
 
-/////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////
 
 let clicksCount;
 let arrayClicked;
@@ -53,12 +43,73 @@ newGame();
 
 // FUNCTIONS //
 
+function updateGameObj() {
+  game = {
+    level: curLev,
+    width: levels[curLev - 1].width,
+    height: levels[curLev - 1].height,
+    quads: levels[curLev - 1].quads,
+    size: levels[curLev - 1].width * levels[curLev - 1].height,
+    color: randomize(colors),
+    figure: figureBuild(levels[curLev - 1]),
+  };
+}
+
 function levelMin() {
-  curLev = 1; //////////////////////// take it from level array[0]
+  curLev = 1;
   game.level = curLev;
-  ref.level.innerHTML = curLev;
   console.log(game);
-  // NEED TO UPDATE game object
+  updateLevelDisplay();
+  storageLevel();
+  updateGameObj();
+  drawEmptyField();
+  // appeal next button
+}
+
+function levelMax() {
+  curLev = levels.length;
+  updateLevelDisplay();
+  storageLevel();
+  updateGameObj();
+  drawEmptyField();
+  // appeal next button
+}
+
+function levelDecrease() {
+  if (curLev === 1) {
+    console.log('return');
+    return;
+  }
+  console.log('level Decrease');
+  curLev -= 1;
+  updateLevelDisplay();
+  storageLevel();
+  updateGameObj();
+  drawEmptyField();
+  // appeal next button
+}
+
+function levelIncrease() {
+  if (curLev === levels.length) {
+    console.log('return');
+    return;
+  }
+  curLev += 1;
+  console.log('level Increase');
+  updateLevelDisplay();
+  storageLevel();
+  updateGameObj();
+  drawEmptyField();
+  // appeal next button
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+function storageLevel() {
+  localStorage.setItem('level', curLev);
+}
+
+function updateLevelDisplay() {
+  ref.level.innerHTML = curLev;
 }
 
 function newGame() {
@@ -66,7 +117,6 @@ function newGame() {
   arrayClicked = [];
   game.color = randomize(colors);
   game.figure = figureBuild(levels[curLev - 1]);
-  ref.main.innerHTML = '';
   console.log('start new game');
   drawEmptyField();
   drawFigure();
@@ -74,11 +124,12 @@ function newGame() {
 }
 
 function drawEmptyField() {
+  ref.main.innerHTML = '';
   ref.main.insertAdjacentHTML('beforeend', renderField(game));
 }
 
 function drawFigure() {
-  nextOff();
+  buttonsOff();
   cursorToggle();
   game.figure.forEach(el => {
     document.getElementById(el).classList.add('right');
@@ -141,7 +192,7 @@ function showResult() {
   } else {
     document.querySelector('.card').classList.add('result-right');
   }
-  nextOn(); // maybe place it not here
+  buttonsOn(); // maybe place it not here
 }
 
 function cursorToggle() {
@@ -154,16 +205,27 @@ function cursorToggle() {
   // }
 }
 
-function nextOn() {
+function buttonsOn() {
+  ref.min.disabled = false;
+  ref.decrease.disabled = false;
+  ref.increase.disabled = false;
+  ref.max.disabled = false;
   ref.next.disabled = false;
 }
 
-function nextOff() {
+function buttonsOff() {
+  ref.min.disabled = true;
+  ref.decrease.disabled = true;
+  ref.increase.disabled = true;
+  ref.max.disabled = true;
   ref.next.disabled = true;
 }
 
-// remove classes 'clicked' and 'right' and 'wrong' but maybe don't need this
-// block buttons when clicking
+function resetRound() {
+  // body
+}
+
+// next button at start screen need to be start btn
 
 /*
 DOCS:
