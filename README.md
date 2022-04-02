@@ -12,10 +12,6 @@ data-атрибуты
 data-custom_name="value"
 dataset.custom_name - получение значения
 https://www.sitepoint.com/how-why-use-html5-custom-data-attributes/
-
-OR
-
-aria
 ;(() => {
     const menuBtnRef = document.querySelector("[data-menu-button]")
     const mobileMenuRef = document.querySelector("[data-menu]")
