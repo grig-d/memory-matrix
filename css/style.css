@@ -273,9 +273,20 @@ a {
   background-color: #fff;
 }
 
-.wrong {
+.result-wrong .wrong {
   background: url('../images/close.svg') no-repeat;
   background-size: contain;
+}
+
+.result-wrong .missed {
+  animation: blink 1s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
 }
 
 /* @media screen and (max-width: 480px) {
