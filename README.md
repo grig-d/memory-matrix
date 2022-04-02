@@ -23,6 +23,7 @@ https://www.sitepoint.com/how-why-use-html5-custom-data-attributes/
     })
 })()
 
+button "start" display: none
 
 start screen
 
