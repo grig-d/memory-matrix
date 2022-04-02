@@ -203,12 +203,12 @@ function showResult() {
 
 function cursorToggle() {
   console.log('cursor anti-cheat toggle');
-  // const element = document.getElementById('matrixCard');
-  // if (!element.style.cursor) {
-  //   element.style.cursor = 'none';
-  // } else {
-  //   element.style.cursor = null;
-  // }
+  const element = document.getElementById('matrixCard');
+  if (!element.style.cursor) {
+    element.style.cursor = 'none';
+  } else {
+    element.style.cursor = null;
+  }
 }
 
 function buttonsOn() {

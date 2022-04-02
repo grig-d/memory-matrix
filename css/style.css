@@ -177,20 +177,6 @@ a {
   transform: rotate(30deg);
 }
 
-#next {
-  width: 64px;
-  height: 32px;
-  /* border-radius: 16px; */
-  outline-style: none;
-  transition: transform 0.2s;
-  margin-bottom: 20px;
-}
-
-#next:hover:enabled {
-  transform: translateY(2px);
-  box-shadow: 0 0px 6px #37bc9b;
-}
-
 .form-container {
   margin: 4px;
 }
@@ -202,9 +188,10 @@ a {
 
 .interface {
   width: 176px;
-  margin: 0 auto 20px auto;
+  margin: 0 auto 10px auto;
   display: flex;
   justify-content: space-between;
+  background-color: tan;
 }
 
 #displayLevel {
@@ -221,9 +208,9 @@ a {
   -ms-user-select: none; /* IE10+/Edge */
   user-select: none; /* Standard */
   /* background-color: tan; */
-  font-size: 16px;
+  font-size: 18px;
   font-family: 'Nunito', sans-serif;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 #decreaseLevel,
@@ -235,9 +222,29 @@ a {
   padding: 2px;
 }
 
+/* 
+min-icon
+minus-icon
+plus-icon
+max-icon
+ */
+
 #status-bar {
-  /* height: 8px; */
-  background-color: tan;
+  /* background-color: tan; */
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.status-quad {
+  width: 8px;
+  height: 8px;
+  border: 1px solid #767676;
+  background-color: #fff;
+}
+
+.status-quad:not(:last-child) {
+  margin-right: 8px;
 }
 
 .card {
@@ -279,7 +286,7 @@ a {
 }
 
 .result-wrong .missed {
-  animation: blink 1s;
+  animation: blink 1.2s;
   animation-iteration-count: infinite;
 }
 
@@ -287,6 +294,23 @@ a {
   50% {
     opacity: 0;
   }
+}
+
+#next {
+  width: 64px;
+  height: 32px;
+  /* border-radius: 16px; */
+  outline-style: none;
+  transition: transform 0.2s;
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 500;
+}
+
+#next:hover:enabled {
+  transform: translateY(2px);
+  box-shadow: 0 0px 6px #37bc9b;
 }
 
 /* @media screen and (max-width: 480px) {

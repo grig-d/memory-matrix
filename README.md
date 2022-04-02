@@ -1,9 +1,36 @@
 ## **Memory Matrix**
 
 <!--
+hover btns svg color
+#ababab disabled
+#767676 active
+#000000 hover
+
+data-attributes 
+data-атрибуты
+позволяют добавить на элемент специальные кастомные значения, которые не должны обрабатываться браузером
+data-custom_name="value"
+dataset.custom_name - получение значения
+https://www.sitepoint.com/how-why-use-html5-custom-data-attributes/
+
+OR
+
 aria
+;(() => {
+    const menuBtnRef = document.querySelector("[data-menu-button]")
+    const mobileMenuRef = document.querySelector("[data-menu]")
+    menuBtnRef.addEventListener("click", () => {
+        const expanded = menuBtnRef.getAttribute("aria-expanded") === "true" || false
+        menuBtnRef.classList.toggle("is-open")
+        menuBtnRef.setAttribute("aria-expanded", !expanded)
+        mobileMenuRef.classList.toggle("is-open")
+    })
+})()
+
 
 start screen
+
+wide interface
 
 // UNDO
 double click undo (toggle 'click')
