@@ -26,11 +26,15 @@ https://www.sitepoint.com/how-why-use-html5-custom-data-attributes/
     })
 })()
 
+interface btns animation
+
 button "start" display countdown and then 'go!'
 
 style next btn (play again)
 don't need icon arrow right - delete em all
 next btn (disappear)
+
+close.svg insert in svg tag
 
 // UNDO
 double click undo (toggle 'click')

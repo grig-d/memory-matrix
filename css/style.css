@@ -232,6 +232,7 @@ a {
   width: 48px;
   height: 32px;
   padding: 2px;
+  transition: transform 0.2s;
 }
 
 #decreaseLevel,
@@ -244,6 +245,26 @@ minus-icon
 plus-icon
 max-icon
  */
+
+#decreaseLevel:hover:enabled {
+  transform: translateY(1px);
+  box-shadow: 0 0px 6px #37bc9b;
+}
+
+#increaseLevel:hover:enabled {
+  transform: translateY(-1px);
+  box-shadow: 0 0px 6px #37bc9b;
+}
+
+#min:hover:enabled {
+  transform: translateX(-1px);
+  box-shadow: 0 0px 6px #37bc9b;
+}
+
+#max:hover:enabled {
+  transform: translateX(1px);
+  box-shadow: 0 0px 6px #37bc9b;
+}
 
 #status-bar {
   /* background-color: tan; */
@@ -262,8 +283,6 @@ max-icon
 .status-quad:not(:last-child) {
   margin-right: 8px;
 }
-
-
 
 .result-right {
   box-shadow: 0 0px 12px rgba(0, 255, 0, 0.5);
@@ -307,15 +326,15 @@ max-icon
   height: 32px;
   /* border-radius: 16px; */
   outline-style: none;
-  transition: transform 0.2s;
   margin-bottom: 20px;
   font-size: 18px;
   font-family: 'Nunito', sans-serif;
   font-weight: 500;
+  transition: transform 0.2s;
 }
 
 #next:hover:enabled {
-  transform: translateY(2px);
+  transform: translateY(1px);
   box-shadow: 0 0px 6px #37bc9b;
 }
 
