@@ -247,7 +247,7 @@ max-icon
 
 #status-bar {
   /* background-color: tan; */
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   display: flex;
   justify-content: center;
 }

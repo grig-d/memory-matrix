@@ -1,6 +1,9 @@
 ## **Memory Matrix**
 
 <!--
+1 start screen
+2 Progress Bar above main field
+
 hover btns svg color
 #ababab disabled
 #767676 active
@@ -23,31 +26,24 @@ https://www.sitepoint.com/how-why-use-html5-custom-data-attributes/
     })
 })()
 
-button "start" display: none
+button "start" display countdown and then 'go!'
 
-start screen
-
-wide interface
+style next btn (play again)
+don't need icon arrow right - delete em all
+next btn (disappear)
 
 // UNDO
 double click undo (toggle 'click')
 enabled-disabled in settings
 
-style next btn (play again)
-don't need icon arrow right - delete em all
-
 // Interface
-logo
-Settings
-next btn (disappear)
-level form, decrease level, increase level
 
-// Progress Bar
-above main field - progress bar with small quads
+Settings
 
 // Settings
 Difficulty: hard 400ms; medium 600ms; easy 800ms;
 Cursor: anti-cheat;
+color: random (default)
 
 // Theme
 default light, dark, cyber
@@ -77,4 +73,5 @@ enabled-disabled in settings
 
 <!-- DONE:
 favicon
+logo
 -->
