@@ -26,8 +26,6 @@ https://www.sitepoint.com/how-why-use-html5-custom-data-attributes/
     })
 })()
 
-interface btns animation
-
 button "start" display countdown and then 'go!'
 
 style next btn (play again)

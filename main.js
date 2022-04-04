@@ -33,14 +33,8 @@ ref.next.addEventListener('click', newGame);
 // Difficulty hard = 400, medium = 600, easy = 800
 let msPerQuad = 400;
 
-let game;
+let game, clicksCount, arrayClicked;;
 updateGameObj();
-
-////////////////////////////////////
-
-let clicksCount;
-let arrayClicked;
-
 newGame();
 
 // FUNCTIONS //
@@ -104,8 +98,6 @@ function levelIncrease() {
   drawEmptyField();
   // appeal next button
 }
-
-/////////////////////////////////////////////////////////////////////////////////////////////
 
 function storageLevel() {
   localStorage.setItem('level', curLev);
@@ -230,12 +222,6 @@ function buttonsOff() {
   ref.max.disabled = true;
   ref.next.disabled = true;
 }
-
-function resetRound() {
-  // body
-}
-
-// next button at start screen need to be start btn
 
 /*
 DOCS:
