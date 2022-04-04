@@ -3,8 +3,10 @@ import levels from './js/levels.js';
 import randomize from './js/randomize.js';
 import figureBuild from './js/figureBuild.js';
 import renderField from './js/renderField.js';
+import renderStatusBar from './js/renderStatusBar.js';
 
 const ref = {
+  status: document.getElementById('status-bar'),
   main: document.getElementById('main'),
   next: document.getElementById('next'),
   level: document.getElementById('displayLevel'),
@@ -126,6 +128,8 @@ function newGame() {
 
 function drawEmptyField() {
   ref.main.innerHTML = '';
+  ref.status.innerHTML = '';
+  ref.status.insertAdjacentHTML('beforeend', renderStatusBar(game));
   ref.main.insertAdjacentHTML('beforeend', renderField(game));
 }
 
