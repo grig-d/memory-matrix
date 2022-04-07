@@ -306,11 +306,6 @@ max-icon
   background-color: #fff;
 }
 
-.result-wrong .wrong {
-  background: url('../images/close.svg') no-repeat;
-  background-size: contain;
-}
-
 .result-wrong .missed {
   animation: blink 1.2s;
   animation-iteration-count: infinite;
