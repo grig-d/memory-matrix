@@ -2,7 +2,6 @@
 
 <!--
 1 start screen
-2 Progress Bar above main field
 
 hover btns svg color
 #ababab disabled
@@ -31,8 +30,6 @@ button "start" display countdown and then 'go!'
 style next btn (play again)
 don't need icon arrow right - delete em all
 next btn (disappear)
-
-close.svg insert in svg tag
 
 // UNDO
 double click undo (toggle 'click')

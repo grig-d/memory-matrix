@@ -33,11 +33,12 @@ ref.next.addEventListener('click', newGame);
 // Difficulty hard = 400, medium = 600, easy = 800
 let msPerQuad = 400;
 
-let game, clicksCount, arrayClicked;
+let game,
+  clicksCount,
+  arrayClicked,
+  arrayStatus = [];
 updateGameObj();
 newGame();
-
-// FUNCTIONS //
 
 function updateGameObj() {
   game = {
@@ -128,21 +129,18 @@ function drawEmptyField() {
 function drawFigure() {
   buttonsOff();
   cursorToggle();
-  game.figure.forEach(el => {
+  game.figure.forEach((el, ind) => {
     document.getElementById(el).classList.add('right');
     document.getElementById(el).style.backgroundColor = game.color;
+    arrayStatus.push(document.getElementById(`${parseInt(++ind)}-status`));
   });
 }
 
 function clearFigure() {
-  game.figure.forEach(el => {
+  game.figure.forEach((el, ind) => {
     document.getElementById(el).style.backgroundColor = null;
+    arrayStatus[ind].style.backgroundColor = game.color;
   });
-  // STATUSBAR start - full color
-  // ref.status;
-  // console.log(game.quads);
-  // game.quads.forEach(el => console.log(el));
-  //
   cursorToggle();
   startClicking();
 }
@@ -167,6 +165,7 @@ function quadMarking(event) {
     curQuad.classList.add('clicked');
     curQuad.style.backgroundColor = game.color;
     arrayClicked.push(curQuad.id);
+    cleanStatusQuad();
   }
 
   if (clicksCount === game.quads) {
@@ -228,6 +227,10 @@ function buttonsOff() {
   ref.increase.disabled = true;
   ref.max.disabled = true;
   ref.next.disabled = true;
+}
+
+function cleanStatusQuad() {
+  arrayStatus.pop().style.backgroundColor = null;
 }
 
 /*
