@@ -212,9 +212,6 @@ a {
   height: 42px;
   justify-content: center;
   align-items: center;
-  border-radius: 50%;
-  /* border-radius: 2px; */
-  border: 1px solid #767676;
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+/Edge */
@@ -223,6 +220,9 @@ a {
   font-size: 22px;
   font-family: 'Nunito', sans-serif;
   font-weight: 500;
+  border-radius: 50%;
+  border: 2px solid rgba(59, 175, 218, 0.8);
+  background-color: rgba(255,233,0,0.3)
 }
 
 #decreaseLevel,
@@ -233,6 +233,8 @@ a {
   height: 32px;
   padding: 2px;
   transition: transform 0.2s;
+  border: 1px solid #222222;
+  border-radius: 2px;
 }
 
 #decreaseLevel,
@@ -247,24 +249,27 @@ plus-icon
 max-icon
  */
 
+#decreaseLevel:disabled,
+#increaseLevel:disabled,
+#min:disabled,
+#max:disabled {
+  border-color: #aaaaaa;
+}
+
 #decreaseLevel:hover:enabled {
   transform: translateY(1px);
-  box-shadow: 0 0px 6px #37bc9b;
 }
 
 #increaseLevel:hover:enabled {
   transform: translateY(-1px);
-  box-shadow: 0 0px 6px #37bc9b;
 }
 
 #min:hover:enabled {
   transform: translateX(-1px);
-  box-shadow: 0 0px 6px #37bc9b;
 }
 
 #max:hover:enabled {
   transform: translateX(1px);
-  box-shadow: 0 0px 6px #37bc9b;
 }
 
 #status-bar {
@@ -277,7 +282,7 @@ max-icon
 .status-quad {
   width: 10px;
   height: 10px;
-  border: 1px solid #767676;
+  border: 1px solid #222222;
   background-color: rgba(255, 255, 255, 0);
 }
 
@@ -302,7 +307,7 @@ max-icon
   height: 40px;
   margin: 4px;
   border-radius: 2px;
-  border: 1px solid #767676;
+  border: 1px solid #222222;
   background-color: #fff;
 }
 
@@ -327,12 +332,39 @@ max-icon
   font-family: 'Nunito', sans-serif;
   font-weight: 500;
   transition: transform 0.2s;
+  border: 1px solid #222222;
+  border-radius: 2px;
+}
+
+#next:disabled {
+  border-color: #aaaaaa;
 }
 
 #next:hover:enabled {
   transform: translateY(1px);
-  box-shadow: 0 0px 6px #37bc9b;
 }
+
+#decreaseLevel:hover:enabled,
+#increaseLevel:hover:enabled,
+#min:hover:enabled,
+#max:hover:enabled,
+#next:hover:enabled {
+  box-shadow: 0 0px 4px 1px #3bafda;
+  background-color: rgba(59, 175, 218, 0.1);
+}
+
+/* appeal 
+.result-wrong .missed {
+  animation: blink 1.2s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+*/
 
 /* @media screen and (max-width: 480px) {
   .value {
