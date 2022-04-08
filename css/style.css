@@ -282,7 +282,7 @@ max-icon
 }
 
 .status-quad:not(:last-child) {
-  margin-right: 8px;
+  margin-right: -1px;
 }
 
 .result-right {
