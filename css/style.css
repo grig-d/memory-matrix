@@ -221,8 +221,9 @@ a {
   font-family: 'Nunito', sans-serif;
   font-weight: 500;
   border-radius: 5px;
-  border: 2px solid #61bcd1;
+  border: 2px solid #3bafda;
   background-color: #f8f0af;
+  margin: 0 8px;
 }
 
 #decreaseLevel,
@@ -233,21 +234,26 @@ a {
   height: 32px;
   padding: 2px;
   transition: transform 0.2s;
-  border: 1px solid #222222;
-  border-radius: 2px;
+  border: 2px solid #aaa;
 }
 
-#decreaseLevel,
+#min {
+  border-radius: 12px 0 0 12px;
+  border-right: 0;
+}
+
+#decreaseLevel {
+  border-radius: 0 3px 3px 0;
+}
+
 #increaseLevel {
-  margin: 0 8px;
+  border-radius: 3px 0 0 3px;
 }
 
-/* 
-min-icon
-minus-icon
-plus-icon
-max-icon
- */
+#max {
+  border-radius: 0 12px 12px 0;
+  border-left: 0px;
+}
 
 #decreaseLevel:disabled,
 #increaseLevel:disabled,
@@ -256,25 +262,18 @@ max-icon
   border-color: #aaaaaa;
 }
 
-#decreaseLevel:hover:enabled {
-  transform: translateY(1px);
-}
-
-#increaseLevel:hover:enabled {
-  transform: translateY(-1px);
-}
-
-#min:hover:enabled {
-  transform: translateX(-1px);
-}
-
+#decreaseLevel:hover:enabled,
+#increaseLevel:hover:enabled,
+#min:hover:enabled,
 #max:hover:enabled {
-  transform: translateX(1px);
+  background-color: #bddff1;
 }
+
+/* min-icon minus-icon plus-icon max-icon */
 
 #status-bar {
   /* background-color: tan; */
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   display: flex;
   justify-content: center;
 }
@@ -332,8 +331,8 @@ max-icon
   font-family: 'Nunito', sans-serif;
   font-weight: 500;
   transition: transform 0.2s;
-  border: 1px solid #222222;
-  border-radius: 2px;
+  border: 2px solid #aaa;
+  border-radius: 3px;
 }
 
 #next:disabled {
@@ -344,12 +343,9 @@ max-icon
   transform: translateY(1px);
 }
 
-#decreaseLevel:hover:enabled,
-#increaseLevel:hover:enabled,
-#min:hover:enabled,
-#max:hover:enabled,
 #next:hover:enabled {
   box-shadow: 0 0px 4px 1px #3bafda;
+  border-color: #3bafda;
   background-color: #e2edf7;
 }
 
