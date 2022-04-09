@@ -220,9 +220,9 @@ a {
   font-size: 22px;
   font-family: 'Nunito', sans-serif;
   font-weight: 500;
-  border-radius: 50%;
-  border: 2px solid rgba(59, 175, 218, 0.8);
-  background-color: rgba(255,233,0,0.3)
+  border-radius: 5px;
+  border: 2px solid #61bcd1;
+  background-color: #f8f0af;
 }
 
 #decreaseLevel,
@@ -350,7 +350,7 @@ max-icon
 #max:hover:enabled,
 #next:hover:enabled {
   box-shadow: 0 0px 4px 1px #3bafda;
-  background-color: rgba(59, 175, 218, 0.1);
+  background-color: #e2edf7;
 }
 
 /* appeal 
@@ -381,33 +381,6 @@ max-icon
     font-size: 11px;
   }
 } */
-
-#datepicker,
-#timepicker {
-  text-align: center;
-  height: 22px;
-  border: 1px solid #ddd;
-  border-radius: 2px;
-  background-color: #efefef;
-}
-
-#datepicker:hover,
-#datepicker:focus,
-#timepicker:hover,
-#timepicker:focus,
-#setDeadlineBtn:hover,
-#setDeadlineBtn:focus,
-.deleteBtn:hover,
-.deleteBtn:focus {
-  background-color: #ddd;
-}
-
-#setDeadlineBtn {
-  width: 107px;
-  height: 22px;
-  border: 1px solid #ddd;
-  border-radius: 2px;
-}
 
 /* 
   -moz-box-shadow:
