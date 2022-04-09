@@ -259,7 +259,7 @@ a {
 #increaseLevel:disabled,
 #min:disabled,
 #max:disabled {
-  border-color: #aaaaaa;
+  border-color: #ccc;
 }
 
 #decreaseLevel:hover:enabled,
@@ -336,7 +336,7 @@ a {
 }
 
 #next:disabled {
-  border-color: #aaaaaa;
+  border-color: #ccc;
 }
 
 #next:hover:enabled {
