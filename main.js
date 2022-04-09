@@ -1,9 +1,5 @@
 import colors from './js/colors.js';
 import levels from './js/levels.js';
-import randomize from './js/randomize.js';
-import figureBuild from './js/figureBuild.js';
-import renderField from './js/renderField.js';
-import renderStatusBar from './js/renderStatusBar.js';
 
 const ref = {
   status: document.getElementById('status-bar'),
@@ -38,7 +34,52 @@ let game,
   arrayClicked,
   arrayStatus = [];
 updateGameObj();
-newGame();
+
+////////////////////
+newGame(); // initiation of game must be by button start => ignition fn
+
+function randomize(array) {
+  return array[Math.floor(Math.floor(Math.random() * array.length))];
+}
+
+function figureBuild({ width, height, quads }) {
+  const arraySet = [];
+  const max = width * height;
+  for (let i = 0; i < quads; i++) {
+    let random = Math.floor(Math.random() * max + 1);
+    while (arraySet.includes(random)) {
+      random = Math.floor(Math.random() * max + 1);
+    }
+    arraySet.push(random);
+  }
+  return arraySet;
+}
+
+function renderField({ width, height }) {
+  let index = 1;
+  let card = '<div class="card" id="matrixCard">';
+  for (let i = 0; i < height; i++) {
+    let row = '<div class="row">';
+    for (let j = 0; j < width; j++) {
+      let quad = `<div class="quad" id="${index}"></div>`;
+      row += quad;
+      index++;
+    }
+    row += '</div>';
+    card += row;
+  }
+  card += '</div>';
+  return card;
+}
+
+function renderStatusBar({ quads }) {
+  let statusBar = '';
+  for (let i = 0; i < quads; i++) {
+    const statusQuad = `<div id="${i + 1}-status" class="status-quad"></div>`;
+    statusBar += statusQuad;
+  }
+  return statusBar;
+}
 
 function updateGameObj() {
   game = {
