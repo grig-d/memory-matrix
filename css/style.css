@@ -177,10 +177,6 @@ a {
   transform: rotate(30deg);
 }
 
-.form-container {
-  margin: 4px;
-}
-
 .content {
   display: flex;
   flex-direction: column;

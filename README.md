@@ -3,11 +3,6 @@
 <!--
 1 start screen
 
-hover btns svg color
-#ababab disabled
-#767676 active
-#000000 hover
-
 data-attributes 
 data-атрибуты
 позволяют добавить на элемент специальные кастомные значения, которые не должны обрабатываться браузером
@@ -28,16 +23,11 @@ https://www.sitepoint.com/how-why-use-html5-custom-data-attributes/
 button "start" display countdown and then 'go!'
 
 style next btn (play again)
-don't need icon arrow right - delete em all
-next btn (disappear)
 
 // UNDO
 double click undo (toggle 'click')
 enabled-disabled in settings
 
-// Interface
-
-Settings
 
 // Settings
 Difficulty: hard 400ms; medium 600ms; easy 800ms;
@@ -68,9 +58,4 @@ game.rotate: {enable, true}
 more than 20
 enabled-disabled in settings
 
--->
-
-<!-- DONE:
-favicon
-logo
 -->

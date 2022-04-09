@@ -35,8 +35,8 @@ let game,
   arrayStatus = [];
 updateGameObj();
 
-////////////////////
-newGame(); // initiation of game must be by button start => ignition fn
+buttonsOn();
+drawEmptyField();
 
 function randomize(array) {
   return array[Math.floor(Math.floor(Math.random() * array.length))];
