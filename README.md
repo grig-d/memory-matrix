@@ -1,7 +1,6 @@
 ## **Memory Matrix**
 
 <!--
-1 start screen
 
 data-attributes 
 data-атрибуты
@@ -22,12 +21,9 @@ https://www.sitepoint.com/how-why-use-html5-custom-data-attributes/
 
 button "start" display countdown and then 'go!'
 
-style next btn (play again)
-
 // UNDO
 double click undo (toggle 'click')
 enabled-disabled in settings
-
 
 // Settings
 Difficulty: hard 400ms; medium 600ms; easy 800ms;
