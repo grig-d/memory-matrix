@@ -96,12 +96,10 @@ function updateGameObj() {
 function levelMin() {
   curLev = 1;
   game.level = curLev;
-  console.log(game);
   updateLevelDisplay();
   storageLevel();
   updateGameObj();
   drawEmptyField();
-  // appeal next button
 }
 
 function levelMax() {
@@ -110,7 +108,6 @@ function levelMax() {
   storageLevel();
   updateGameObj();
   drawEmptyField();
-  // appeal next button
 }
 
 function levelDecrease() {

@@ -2,6 +2,8 @@
 
 <!--
 
+button "start" display spinner and then 'go!'
+
 data-attributes 
 data-атрибуты
 позволяют добавить на элемент специальные кастомные значения, которые не должны обрабатываться браузером
@@ -18,8 +20,6 @@ https://www.sitepoint.com/how-why-use-html5-custom-data-attributes/
         mobileMenuRef.classList.toggle("is-open")
     })
 })()
-
-button "start" display countdown and then 'go!'
 
 // UNDO
 double click undo (toggle 'click')
