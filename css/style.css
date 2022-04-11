@@ -219,7 +219,7 @@ a {
   border-radius: 5px;
   border: 2px solid #3bafda;
   background-color: #f8f0af;
-  margin: 0 8px;
+  margin: 0;
 }
 
 #decreaseLevel,
@@ -239,11 +239,13 @@ a {
 }
 
 #decreaseLevel {
-  border-radius: 0 3px 3px 0;
+  border-radius: 0;
+  border-right: 0;
 }
 
 #increaseLevel {
-  border-radius: 3px 0 0 3px;
+  border-radius: 0;
+  border-left: 0px;
 }
 
 #max {
