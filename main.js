@@ -147,6 +147,8 @@ function updateLevelDisplay() {
 }
 
 function newGame() {
+  ref.next.style.fontSize = '16px';
+  ref.next.innerHTML = 'Ready';
   clicksCount = 0;
   arrayClicked = [];
   game.color = randomize(colors);
@@ -180,6 +182,8 @@ function clearFigure() {
     arrayStatus[ind].style.backgroundColor = game.color;
   });
   cursorToggle();
+  ref.next.style.fontSize = '18px';
+  ref.next.innerHTML = 'Go!';
   startClicking();
 }
 
@@ -239,6 +243,7 @@ function showResult() {
     document.querySelector('.card').classList.add('result-right');
   }
   buttonsOn();
+  ref.next.innerHTML = 'Start';
 }
 
 function cursorToggle() {
@@ -273,7 +278,6 @@ function cleanStatusQuad() {
 
 /*
 DOCS:
-
 right - true quad
 clicked - any quad that was clicked once to prevent second click count on the same quad
 wrong - clicked wrong quad
