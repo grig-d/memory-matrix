@@ -152,11 +152,6 @@ a {
 .logo {
   width: 32px;
   height: 32px;
-  background-color: tomato;
-}
-
-.logo:hover {
-  box-shadow: 0 0px 4px 0px rgb(0 0 0 / 30%);
 }
 
 .settings {
@@ -199,7 +194,7 @@ a {
   background-color: #ffffff;
   box-shadow: 0 0px 8px rgb(0 0 0 / 30%);
   margin-bottom: 20px;
-  padding: 16px;
+  padding: 12px;
 }
 
 #displayLevel {
@@ -291,21 +286,34 @@ a {
   box-shadow: 0 0px 12px 2px rgba(0, 255, 0, 0.5);
 }
 
-/* .result-wrong {
-  box-shadow: 0 0px 12px 2px rgba(255, 0, 0, 0.5);
-} */
-
 .row {
   display: flex;
 }
 
 .quad {
-  width: 40px;
-  height: 40px;
-  margin: 4px;
-  border-radius: 2px;
   border: 1px solid #222;
   background-color: #fff;
+}
+
+.small {
+  border-radius: 2px;
+  margin: 4px;
+  width: 50px;
+  height: 50px;
+}
+
+.medium {
+  border-radius: 3px;
+  margin: 5px;
+  width: 60px;
+  height: 60px;
+}
+
+.large {
+  border-radius: 3px;
+  margin: 6px;
+  width: 70px;
+  height: 70px;
 }
 
 .result-wrong .missed {

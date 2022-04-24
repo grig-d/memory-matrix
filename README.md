@@ -2,8 +2,6 @@
 
 <!--
 
-button "start" display spinner and then 'go!'
-
 data-attributes 
 data-атрибуты
 позволяют добавить на элемент специальные кастомные значения, которые не должны обрабатываться браузером
@@ -53,5 +51,9 @@ game.rotate: {enable, true}
 // Extra levels
 more than 20
 enabled-disabled in settings
+
+Choose level and click on the Start Game button to start!
+
+// Drop Menu https://www.youtube.com/watch?v=bC6vOWWNoas
 
 -->
