@@ -2,6 +2,14 @@
 
 <!--
 
+// UNDO
+double click undo (toggle 'click')
+enabled-disabled in settings
+dataset.attribute
+.removeAttribute('data-attribute');
+
+flex gap
+
 data-attributes 
 data-атрибуты
 позволяют добавить на элемент специальные кастомные значения, которые не должны обрабатываться браузером
@@ -18,12 +26,6 @@ https://www.sitepoint.com/how-why-use-html5-custom-data-attributes/
         mobileMenuRef.classList.toggle("is-open")
     })
 })()
-
-// UNDO
-double click undo (toggle 'click')
-enabled-disabled in settings
-dataset.attribute
-.removeAttribute('data-attribute');
 
 // Settings
 Difficulty: hard 400ms; medium 600ms; easy 800ms;
