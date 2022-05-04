@@ -185,7 +185,7 @@ a {
   align-items: center;
 }
 
-.card {
+#matrix {
   display: flex;
   flex-direction: column;
   justify-content: center;

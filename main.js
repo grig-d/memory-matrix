@@ -4,7 +4,7 @@ import sizes from './js/sizes.js';
 
 const ref = {
   status: document.getElementById('status-bar'),
-  main: document.getElementById('main'),
+  matrix: document.getElementById('matrix'),
   next: document.getElementById('next'),
   level: document.getElementById('displayLevel'),
   decrease: document.getElementById('decreaseLevel'),
@@ -62,7 +62,7 @@ function figureBuild({ width, height, quads }) {
 
 function renderField({ width, height }) {
   let index = 1;
-  let card = '<div class="card" id="matrixCard">';
+  let cardContent = '';
   for (let i = 0; i < height; i++) {
     let row = '<div class="row">';
     for (let j = 0; j < width; j++) {
@@ -71,10 +71,9 @@ function renderField({ width, height }) {
       index++;
     }
     row += '</div>';
-    card += row;
+    cardContent += row;
   }
-  card += '</div>';
-  return card;
+  return cardContent;
 }
 
 function renderStatusBar({ quads }) {
@@ -167,10 +166,10 @@ function newGame() {
 }
 
 function drawEmptyField() {
-  ref.main.innerHTML = '';
+  ref.matrix.innerHTML = '';
   ref.status.innerHTML = '';
   ref.status.insertAdjacentHTML('beforeend', renderStatusBar(game));
-  ref.main.insertAdjacentHTML('beforeend', renderField(game));
+  ref.matrix.insertAdjacentHTML('beforeend', renderField(game));
 }
 
 function drawFigure() {
@@ -196,12 +195,12 @@ function clearFigure() {
 
 function startClicking() {
   console.log('START CLICKING');
-  ref.main.addEventListener('click', quadMarking);
+  ref.matrix.addEventListener('click', quadMarking);
 }
 
 function stopClicking() {
   console.log('STOP CLICKING');
-  ref.main.removeEventListener('click', quadMarking);
+  ref.matrix.removeEventListener('click', quadMarking);
 }
 
 function quadMarking(event) {
@@ -248,7 +247,7 @@ function showResult() {
           .insertAdjacentHTML('beforeend', missedIconMarkup);
       }
     });
-    document.querySelector('.card').classList.add('result-wrong');
+    ref.matrix.classList.add('result-wrong');
   } else {
     const checkIconMarkup = `<svg style="width: ${quadSize.px - 2}px; height: ${
       quadSize.px - 2
@@ -265,11 +264,10 @@ function showResult() {
 
 function cursorToggle() {
   console.log('ANTI-CHEAT CURSOR TOGGLE');
-  // const element = document.getElementById('matrixCard');
-  // if (!element.style.cursor) {
-  //   element.style.cursor = 'none';
+  // if (!ref.matrix.style.cursor) {
+  //   ref.matrix.style.cursor = 'none';
   // } else {
-  //   element.style.cursor = null;
+  //   ref.matrix.style.cursor = null;
   // }
 }
 

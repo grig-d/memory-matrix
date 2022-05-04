@@ -8,8 +8,9 @@ enabled-disabled in settings
 dataset.attribute
 .removeAttribute('data-attribute');
 
-flex gap
+// flex gap
 
+// Modal 'Settings'
 data-attributes 
 data-атрибуты
 позволяют добавить на элемент специальные кастомные значения, которые не должны обрабатываться браузером
