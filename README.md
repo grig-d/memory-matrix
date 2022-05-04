@@ -22,19 +22,17 @@ https://www.sitepoint.com/how-why-use-html5-custom-data-attributes/
 // UNDO
 double click undo (toggle 'click')
 enabled-disabled in settings
+dataset.attribute
+.removeAttribute('data-attribute');
 
 // Settings
 Difficulty: hard 400ms; medium 600ms; easy 800ms;
 Cursor: anti-cheat;
-color: random (default)
-
-// Theme
-default light, dark, cyber
-
-// Size:
-small 40x40 8 20
-medium 50x50 10 25
-large 60x60 12 20
+Color:  random (default)
+Size:   small 40x40 8 20
+        medium 50x50 10 25
+        large 60x60 12 20
+Theme:  default light, dark, cyber
 
 // Client Storage:
 localStorage.setItem('settings', JSON.stringify(object));

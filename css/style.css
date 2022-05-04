@@ -282,10 +282,6 @@ a {
   margin-right: -1px;
 }
 
-.result-right {
-  box-shadow: 0 0px 12px 2px rgba(0, 255, 0, 0.5);
-}
-
 .row {
   display: flex;
 }

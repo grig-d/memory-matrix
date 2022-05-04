@@ -117,10 +117,12 @@ function levelMax() {
 
 function levelDecrease() {
   if (curLev === 1) {
-    console.log('return');
+    console.log('return; need to disable decrease and min buttons');
+    // FIXME: need to disable decrease and min buttons - decreaseButtonsOff()
     return;
   }
-  console.log('level Decrease');
+  // FIXME: check increase button to enable
+  console.log('LEVEL DECREASE');
   curLev -= 1;
   updateLevelDisplay();
   storageLevel();
@@ -130,11 +132,13 @@ function levelDecrease() {
 
 function levelIncrease() {
   if (curLev === levels.length) {
-    console.log('return');
+    console.log('return; need to disable increase and max buttons');
+    // FIXME: need to disable increase and max buttons - increaseButtonsOff()
     return;
   }
+  // FIXME: check decrease button to enable
   curLev += 1;
-  console.log('level Increase');
+  console.log('LEVEL INCREASE');
   updateLevelDisplay();
   storageLevel();
   updateGameObj();
@@ -156,7 +160,7 @@ function newGame() {
   arrayClicked = [];
   game.color = randomize(colors);
   game.figure = figureBuild(levels[curLev - 1]);
-  console.log('start new game');
+  console.log('NEW GAME');
   drawEmptyField();
   drawFigure();
   setTimeout(clearFigure, game.quads * msPerQuad);
@@ -173,9 +177,7 @@ function drawFigure() {
   buttonsOff();
   cursorToggle();
   game.figure.forEach((el, ind) => {
-    // document.getElementById(el).classList.add('right'); // -----------------------NONEED
     document.getElementById(el).dataset.type = 'marked';
-    // document.getElementById(el).removeAttribute('data-type'); // -----------------------NONEED
     document.getElementById(el).style.backgroundColor = game.color;
     arrayStatus.push(document.getElementById(`${parseInt(++ind)}-status`));
   });
@@ -193,23 +195,19 @@ function clearFigure() {
 }
 
 function startClicking() {
-  console.log('START clicking'); // -----------------------NONEED
+  console.log('START CLICKING');
   ref.main.addEventListener('click', quadMarking);
 }
 
 function stopClicking() {
-  console.log('STOP clicking'); // -----------------------NONEED
+  console.log('STOP CLICKING');
   ref.main.removeEventListener('click', quadMarking);
 }
 
 function quadMarking(event) {
   const curQuad = event.target;
-  if (
-    curQuad.classList.contains('quad') &&
-    !curQuad.classList.contains('clicked')
-  ) {
+  if (curQuad.classList.contains('quad') && !curQuad.dataset.state) {
     clicksCount++;
-    curQuad.classList.add('clicked'); // -----------------------NONEED
     curQuad.dataset.state = 'clicked';
     curQuad.style.backgroundColor = game.color;
     arrayClicked.push(curQuad.id);
@@ -224,21 +222,27 @@ function quadMarking(event) {
 }
 
 function showResult() {
-  console.log('RESULT'); // don't need this
+  console.log('SHOW RESULT');
   const arrayWrong = arrayClicked.filter(
-    el => !document.getElementById(el).classList.contains('right'), // -----------------------NONEED CLASS
+    el => document.getElementById(el).dataset.type === 'empty',
   );
   if (arrayWrong.length) {
-    const wrongIconMarkup = `<svg style="width: ${quadSize.px - 2}px; height: ${quadSize.px - 2}px" viewBox="0 0 24 24"><path fill="#999999" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+    const wrongIconMarkup = `<svg style="width: ${quadSize.px - 2}px; height: ${
+      quadSize.px - 2
+    }px" viewBox="0 0 24 24"><path fill="#999999" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
 </svg>`;
     arrayWrong.forEach(el => {
       const currentQuad = document.getElementById(el);
       currentQuad.style.backgroundColor = null;
       currentQuad.insertAdjacentHTML('beforeend', wrongIconMarkup);
     });
-    const missedIconMarkup = `<svg class="missed" style="width: ${quadSize.px - 2}px; height: ${quadSize.px - 2}px" viewBox="0 0 24 24"><path fill="${game.color}" d="m 8.625,21 h 4.5 L 21,13.125 v -4.5 M 21,21 V 16.5 L 16.5,21 M 3,3 V 7.5 L 7.5,3 M 10.875,3 3,10.875 v 4.5 L 15.375,3 M 18.75,3 3,18.75 V 21 H 5.25 L 21,5.25 V 3 Z" /></svg>`;
+    const missedIconMarkup = `<svg class="missed" style="width: ${
+      quadSize.px - 2
+    }px; height: ${quadSize.px - 2}px" viewBox="0 0 24 24"><path fill="${
+      game.color
+    }" d="m 8.625,21 h 4.5 L 21,13.125 v -4.5 M 21,21 V 16.5 L 16.5,21 M 3,3 V 7.5 L 7.5,3 M 10.875,3 3,10.875 v 4.5 L 15.375,3 M 18.75,3 3,18.75 V 21 H 5.25 L 21,5.25 V 3 Z" /></svg>`;
     game.figure.forEach(el => {
-      if (!document.getElementById(el).classList.contains('clicked')) {
+      if (!document.getElementById(el).dataset.state) {
         document
           .getElementById(el)
           .insertAdjacentHTML('beforeend', missedIconMarkup);
@@ -246,14 +250,21 @@ function showResult() {
     });
     document.querySelector('.card').classList.add('result-wrong');
   } else {
-    document.querySelector('.card').classList.add('result-right');
+    const checkIconMarkup = `<svg style="width: ${quadSize.px - 2}px; height: ${
+      quadSize.px - 2
+    }px" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.4)" d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" /></svg>`;
+    arrayClicked.forEach(el => {
+      document
+        .getElementById(el)
+        .insertAdjacentHTML('beforeend', checkIconMarkup);
+    });
   }
   buttonsOn();
   ref.next.innerHTML = 'Start';
 }
 
 function cursorToggle() {
-  console.log('cursor anti-cheat toggle');
+  console.log('ANTI-CHEAT CURSOR TOGGLE');
   // const element = document.getElementById('matrixCard');
   // if (!element.style.cursor) {
   //   element.style.cursor = 'none';
@@ -278,27 +289,26 @@ function buttonsOff() {
   ref.next.disabled = true;
 }
 
+function increaseButtonsOff() {
+  // FIXME:
+}
+
+function decreaseButtonsOff() {
+  // FIXME:
+}
+
 function cleanStatusQuad() {
   arrayStatus.pop().style.backgroundColor = null;
 }
 
-// html right === missed
-// html right clicked === right
-// html clicked === wrong
-
-// data-type="empty" - empty quad
-// data-type="marked" - filled quad
-// data-clicked="clicked" - any quad that was clicked once to prevent second click count on the same quad
-
-// dataset.attribute
-// .removeAttribute('data-attribute');
-
-// missed - is class with styles
-// class right - don't need
-// class clicked - don't need
-
 /*
 DOCS:
+
+data-type="empty" - empty quad
+data-type="marked" - filled quad
+data-clicked="clicked" - any quad that was clicked
+missed - class with styles
+
 newGame() > drawEmptyField() > renderField(game) > drawFigure() > clearFigure() > startClicking() > quadMarking() >
 cleanStatusQuad() > stopClicking() > showResult()
 */
