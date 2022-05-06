@@ -2,7 +2,7 @@ import colors from './js/colors.js';
 import levels from './js/levels.js';
 import sizes from './js/sizes.js';
 
-const consoleLog = '1'; // console.log messages NO (0) or YES (1)
+const consoleLog = '1'; // console.log messages NO ('') or YES ('1')
 
 const ref = {
   status: document.getElementById('status-bar'),
@@ -175,7 +175,7 @@ function newGame() {
   game.color = randomize(colors);
   game.figure = figureBuild(levels[curLev - 1]);
   if (consoleLog) {
-    console.log('NEW GAME');
+    console.log('NEW GAME * * *');
   }
   drawEmptyField();
   drawFigure();
@@ -240,7 +240,8 @@ function quadMarking(event) {
     clicksCount--;
     currentQuad.removeAttribute('data-state');
     currentQuad.style.backgroundColor = null;
-    arrayClicked.pop();
+    const indexToRemove = arrayClicked.indexOf(currentQuad.id);
+    arrayClicked.splice(indexToRemove, 1);
     undoStatusQuad();
   }
   if (clicksCount === game.quads) {
@@ -257,6 +258,9 @@ function showResult() {
     el => document.getElementById(el).dataset.type === 'empty',
   );
   if (arrayWrong.length) {
+    if (consoleLog) {
+      console.log('WRONG');
+    }
     const wrongIconMarkup = `<svg style="width: ${quadSize.px - 2}px; height: ${
       quadSize.px - 2
     }px" viewBox="0 0 24 24"><path fill="#999999" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
@@ -280,6 +284,9 @@ function showResult() {
     });
     ref.matrix.classList.add('result-wrong');
   } else {
+    if (consoleLog) {
+      console.log('RIGHT');
+    }
     const checkIconMarkup = `<svg style="width: ${quadSize.px - 2}px; height: ${
       quadSize.px - 2
     }px" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.4)" d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" /></svg>`;
