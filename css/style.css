@@ -291,6 +291,13 @@ a {
   background-color: #fff;
 }
 
+.tiny {
+  border-radius: 2px;
+  margin: 3px;
+  width: 40px;
+  height: 40px;
+}
+
 .small {
   border-radius: 2px;
   margin: 4px;
@@ -310,6 +317,13 @@ a {
   margin: 6px;
   width: 70px;
   height: 70px;
+}
+
+.giant {
+  border-radius: 4px;
+  margin: 7px;
+  width: 80px;
+  height: 80px;
 }
 
 .result-wrong .missed {

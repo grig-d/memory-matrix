@@ -2,14 +2,6 @@
 
 <!--
 
-// UNDO
-double click undo (toggle 'click')
-enabled-disabled in settings
-dataset.attribute
-.removeAttribute('data-attribute');
-
-// flex gap
-
 // Modal 'Settings'
 data-attributes 
 data-атрибуты
@@ -29,12 +21,14 @@ https://www.sitepoint.com/how-why-use-html5-custom-data-attributes/
 })()
 
 // Settings
-Difficulty: hard 400ms; medium 600ms; easy 800ms;
-Cursor: anti-cheat;
+Difficulty(msPerQuad): hard 400ms; medium 600ms; easy 800ms;
+Cursor(antiCheat): anti-cheat;
 Color:  random (default)
-Size:   small 40x40 8 20
-        medium 50x50 10 25
-        large 60x60 12 20
+Size(quadSize):   tiny 40x40
+        small 50x50
+        medium 60x60
+        large 70x70
+        giant 80x80
 Theme:  default light, dark, cyber
 
 // Client Storage:
@@ -42,7 +36,10 @@ localStorage.setItem('settings', JSON.stringify(object));
 localStorage.clear();
 save level
 save theme
-save quad color
+save size
+save anti-cheat toggle
+
+// Theme:  default light, dark, cyber
 
 // Alternative field:
 random field rotate 90 (3x8 or 8x3)

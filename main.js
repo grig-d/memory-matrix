@@ -2,6 +2,8 @@ import colors from './js/colors.js';
 import levels from './js/levels.js';
 import sizes from './js/sizes.js';
 
+const consoleLog = '1'; // console.log messages NO (0) or YES (1)
+
 const ref = {
   status: document.getElementById('status-bar'),
   matrix: document.getElementById('matrix'),
@@ -29,10 +31,13 @@ ref.next.addEventListener('click', newGame);
 
 // Difficulty hard = 400, medium = 600, easy = 800
 // FROM SETTINGS default easy
-let msPerQuad = 400;
+const msPerQuad = 400;
 
 // FROM SETTINGS default medium
-let quadSize = sizes[0];
+const quadSize = sizes[2];
+
+// FROM SETTINGS default 0
+const antiCheat = 0;
 
 let game,
   clicksCount,
@@ -98,6 +103,12 @@ function updateGameObj() {
 }
 
 function levelMin() {
+  if (curLev === 1) {
+    return;
+  }
+  if (consoleLog) {
+    console.log('LEVEL MIN');
+  }
   curLev = 1;
   game.level = curLev;
   updateLevelDisplay();
@@ -107,6 +118,12 @@ function levelMin() {
 }
 
 function levelMax() {
+  if (curLev === levels.length) {
+    return;
+  }
+  if (consoleLog) {
+    console.log('LEVEL MAX');
+  }
   curLev = levels.length;
   updateLevelDisplay();
   storageLevel();
@@ -116,12 +133,11 @@ function levelMax() {
 
 function levelDecrease() {
   if (curLev === 1) {
-    console.log('return; need to disable decrease and min buttons');
-    // FIXME: need to disable decrease and min buttons - decreaseButtonsOff()
     return;
   }
-  // FIXME: check increase button to enable
-  console.log('LEVEL DECREASE');
+  if (consoleLog) {
+    console.log('LEVEL DECREASE');
+  }
   curLev -= 1;
   updateLevelDisplay();
   storageLevel();
@@ -131,13 +147,12 @@ function levelDecrease() {
 
 function levelIncrease() {
   if (curLev === levels.length) {
-    console.log('return; need to disable increase and max buttons');
-    // FIXME: need to disable increase and max buttons - increaseButtonsOff()
     return;
   }
-  // FIXME: check decrease button to enable
+  if (consoleLog) {
+    console.log('LEVEL INCREASE');
+  }
   curLev += 1;
-  console.log('LEVEL INCREASE');
   updateLevelDisplay();
   storageLevel();
   updateGameObj();
@@ -159,7 +174,9 @@ function newGame() {
   arrayClicked = [];
   game.color = randomize(colors);
   game.figure = figureBuild(levels[curLev - 1]);
-  console.log('NEW GAME');
+  if (consoleLog) {
+    console.log('NEW GAME');
+  }
   drawEmptyField();
   drawFigure();
   setTimeout(clearFigure, game.quads * msPerQuad);
@@ -178,7 +195,7 @@ function drawFigure() {
   game.figure.forEach((el, ind) => {
     document.getElementById(el).dataset.type = 'marked';
     document.getElementById(el).style.backgroundColor = game.color;
-    arrayStatus.push(document.getElementById(`${parseInt(++ind)}-status`));
+    arrayStatus.push(document.getElementById(`${++ind}-status`));
   });
 }
 
@@ -194,34 +211,48 @@ function clearFigure() {
 }
 
 function startClicking() {
-  console.log('START CLICKING');
+  if (consoleLog) {
+    console.log('START CLICKING');
+  }
   ref.matrix.addEventListener('click', quadMarking);
 }
 
 function stopClicking() {
-  console.log('STOP CLICKING');
+  if (consoleLog) {
+    console.log('STOP CLICKING');
+  }
   ref.matrix.removeEventListener('click', quadMarking);
 }
 
 function quadMarking(event) {
-  const curQuad = event.target;
-  if (curQuad.classList.contains('quad') && !curQuad.dataset.state) {
+  const currentQuad = event.target;
+  if (currentQuad.classList.contains('quad') && !currentQuad.dataset.state) {
     clicksCount++;
-    curQuad.dataset.state = 'clicked';
-    curQuad.style.backgroundColor = game.color;
-    arrayClicked.push(curQuad.id);
+    currentQuad.dataset.state = 'clicked';
+    currentQuad.style.backgroundColor = game.color;
+    arrayClicked.push(currentQuad.id);
     cleanStatusQuad();
+  } else if (
+    // UNDO
+    currentQuad.classList.contains('quad') &&
+    currentQuad.dataset.state
+  ) {
+    clicksCount--;
+    currentQuad.removeAttribute('data-state');
+    currentQuad.style.backgroundColor = null;
+    arrayClicked.pop();
+    undoStatusQuad();
   }
-
   if (clicksCount === game.quads) {
     stopClicking();
     showResult();
-    return;
   }
 }
 
 function showResult() {
-  console.log('SHOW RESULT');
+  if (consoleLog) {
+    console.log('SHOW RESULT');
+  }
   const arrayWrong = arrayClicked.filter(
     el => document.getElementById(el).dataset.type === 'empty',
   );
@@ -263,12 +294,16 @@ function showResult() {
 }
 
 function cursorToggle() {
-  console.log('ANTI-CHEAT CURSOR TOGGLE');
-  // if (!ref.matrix.style.cursor) {
-  //   ref.matrix.style.cursor = 'none';
-  // } else {
-  //   ref.matrix.style.cursor = null;
-  // }
+  if (antiCheat) {
+    if (consoleLog) {
+      console.log('ANTI-CHEAT CURSOR TOGGLE');
+    }
+    if (!ref.matrix.style.cursor) {
+      ref.matrix.style.cursor = 'none';
+    } else {
+      ref.matrix.style.cursor = null;
+    }
+  }
 }
 
 function buttonsOn() {
@@ -287,16 +322,15 @@ function buttonsOff() {
   ref.next.disabled = true;
 }
 
-function increaseButtonsOff() {
-  // FIXME:
-}
-
-function decreaseButtonsOff() {
-  // FIXME:
-}
-
 function cleanStatusQuad() {
   arrayStatus.pop().style.backgroundColor = null;
+}
+
+function undoStatusQuad() {
+  const index = arrayStatus.length + 1;
+  const currentStatusQuad = document.getElementById(`${index}-status`);
+  arrayStatus.push(currentStatusQuad);
+  currentStatusQuad.style.backgroundColor = game.color;
 }
 
 /*
