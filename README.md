@@ -2,6 +2,8 @@
 
 <!--
 
+make settings icon-burger
+
 // Modal 'Settings'
 data-attributes 
 data-атрибуты
@@ -19,6 +21,15 @@ https://www.sitepoint.com/how-why-use-html5-custom-data-attributes/
         mobileMenuRef.classList.toggle("is-open")
     })
 })()
+
+модальное окно	1:10:14	[HTML22] М5-9. Позиционированные элементы
+бургер	1:41:00	[HTML22] М8-15. Адаптивная вёрстка. Часть 1
+скроллинг модалки	0:07:00	[HTML22] М8-15. Адаптивная вёрстка. Часть 2
+скроллинг модалки	1:00:10	[HTML22] М8-15. Адаптивная вёрстка. Часть 2
+
+<input type="range" id="vol" name="vol" min="0" max="50">
+
+// ESC, clickBackdrop, close button
 
 // Settings
 Difficulty(msPerQuad): hard 400ms; medium 600ms; easy 800ms;
@@ -54,4 +65,5 @@ Choose level and click on the Start Game button to start!
 
 // Drop Menu https://www.youtube.com/watch?v=bC6vOWWNoas
 
+// css vendor prefixes
 -->

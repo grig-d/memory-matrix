@@ -4,7 +4,7 @@ import sizes from './js/sizes.js';
 
 const consoleLog = '1'; // console.log messages NO ('') or YES ('1')
 
-const ref = {
+const refs = {
   status: document.getElementById('status-bar'),
   matrix: document.getElementById('matrix'),
   next: document.getElementById('next'),
@@ -13,6 +13,9 @@ const ref = {
   increase: document.getElementById('increaseLevel'),
   min: document.getElementById('min'),
   max: document.getElementById('max'),
+  settings: document.getElementById('settings'),
+  backdrop: document.querySelector('[data-backdrop]'),
+  closeModal: document.querySelector('[data-close-modal]'),
 };
 
 let curLev = localStorage.getItem('level')
@@ -21,13 +24,13 @@ let curLev = localStorage.getItem('level')
 
 storageLevel();
 
-ref.level.innerHTML = curLev;
+refs.level.innerHTML = curLev;
 
-ref.min.addEventListener('click', levelMin);
-ref.max.addEventListener('click', levelMax);
-ref.decrease.addEventListener('click', levelDecrease);
-ref.increase.addEventListener('click', levelIncrease);
-ref.next.addEventListener('click', newGame);
+refs.min.addEventListener('click', levelMin);
+refs.max.addEventListener('click', levelMax);
+refs.decrease.addEventListener('click', levelDecrease);
+refs.increase.addEventListener('click', levelIncrease);
+refs.next.addEventListener('click', newGame);
 
 // Difficulty hard = 400, medium = 600, easy = 800
 // FROM SETTINGS default easy
@@ -164,12 +167,12 @@ function storageLevel() {
 }
 
 function updateLevelDisplay() {
-  ref.level.innerHTML = curLev;
+  refs.level.innerHTML = curLev;
 }
 
 function newGame() {
-  ref.next.style.fontSize = '16px';
-  ref.next.innerHTML = 'Ready';
+  refs.next.style.fontSize = '16px';
+  refs.next.innerHTML = 'Ready';
   clicksCount = 0;
   arrayClicked = [];
   game.color = randomize(colors);
@@ -183,10 +186,10 @@ function newGame() {
 }
 
 function drawEmptyField() {
-  ref.matrix.innerHTML = '';
-  ref.status.innerHTML = '';
-  ref.status.insertAdjacentHTML('beforeend', renderStatusBar(game));
-  ref.matrix.insertAdjacentHTML('beforeend', renderField(game));
+  refs.matrix.innerHTML = '';
+  refs.status.innerHTML = '';
+  refs.status.insertAdjacentHTML('beforeend', renderStatusBar(game));
+  refs.matrix.insertAdjacentHTML('beforeend', renderField(game));
 }
 
 function drawFigure() {
@@ -205,8 +208,8 @@ function clearFigure() {
     arrayStatus[ind].style.backgroundColor = game.color;
   });
   cursorToggle();
-  ref.next.style.fontSize = '18px';
-  ref.next.innerHTML = 'Go!';
+  refs.next.style.fontSize = '18px';
+  refs.next.innerHTML = 'Go!';
   startClicking();
 }
 
@@ -214,14 +217,14 @@ function startClicking() {
   if (consoleLog) {
     console.log('START CLICKING');
   }
-  ref.matrix.addEventListener('click', quadMarking);
+  refs.matrix.addEventListener('click', quadMarking);
 }
 
 function stopClicking() {
   if (consoleLog) {
     console.log('STOP CLICKING');
   }
-  ref.matrix.removeEventListener('click', quadMarking);
+  refs.matrix.removeEventListener('click', quadMarking);
 }
 
 function quadMarking(event) {
@@ -233,10 +236,10 @@ function quadMarking(event) {
     arrayClicked.push(currentQuad.id);
     cleanStatusQuad();
   } else if (
-    // UNDO
     currentQuad.classList.contains('quad') &&
     currentQuad.dataset.state
   ) {
+    // UNDO
     clicksCount--;
     currentQuad.removeAttribute('data-state');
     currentQuad.style.backgroundColor = null;
@@ -282,7 +285,7 @@ function showResult() {
           .insertAdjacentHTML('beforeend', missedIconMarkup);
       }
     });
-    ref.matrix.classList.add('result-wrong');
+    refs.matrix.classList.add('result-wrong');
   } else {
     if (consoleLog) {
       console.log('RIGHT');
@@ -297,7 +300,7 @@ function showResult() {
     });
   }
   buttonsOn();
-  ref.next.innerHTML = 'Start';
+  refs.next.innerHTML = 'Start';
 }
 
 function cursorToggle() {
@@ -305,28 +308,28 @@ function cursorToggle() {
     if (consoleLog) {
       console.log('ANTI-CHEAT CURSOR TOGGLE');
     }
-    if (!ref.matrix.style.cursor) {
-      ref.matrix.style.cursor = 'none';
+    if (!refs.matrix.style.cursor) {
+      refs.matrix.style.cursor = 'none';
     } else {
-      ref.matrix.style.cursor = null;
+      refs.matrix.style.cursor = null;
     }
   }
 }
 
 function buttonsOn() {
-  ref.min.disabled = false;
-  ref.decrease.disabled = false;
-  ref.increase.disabled = false;
-  ref.max.disabled = false;
-  ref.next.disabled = false;
+  refs.min.disabled = false;
+  refs.decrease.disabled = false;
+  refs.increase.disabled = false;
+  refs.max.disabled = false;
+  refs.next.disabled = false;
 }
 
 function buttonsOff() {
-  ref.min.disabled = true;
-  ref.decrease.disabled = true;
-  ref.increase.disabled = true;
-  ref.max.disabled = true;
-  ref.next.disabled = true;
+  refs.min.disabled = true;
+  refs.decrease.disabled = true;
+  refs.increase.disabled = true;
+  refs.max.disabled = true;
+  refs.next.disabled = true;
 }
 
 function cleanStatusQuad() {
@@ -351,3 +354,13 @@ missed - class with styles
 newGame() > drawEmptyField() > renderField(game) > drawFigure() > clearFigure() > startClicking() > quadMarking() >
 cleanStatusQuad() > stopClicking() > showResult()
 */
+
+refs.settings.addEventListener('click', toggleModal);
+refs.closeModal.addEventListener('click', toggleModal);
+
+function toggleModal() {
+  if (consoleLog) {
+    console.log(`SETTINGS`);
+  }
+  refs.backdrop.classList.toggle('is-hidden');
+}

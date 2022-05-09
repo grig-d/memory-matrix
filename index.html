@@ -15,7 +15,7 @@
   <body>
     <div class="page">
       <header class="header">
-        <div class="logo">
+        <div class="logo unselectable">
           <img src="./images/memory_matrix_32_logo.png" alt="Logo" />
         </div>
         <h1 class="heading unselectable">
@@ -23,17 +23,17 @@
           ><span class="color-3">ry</span> <span class="color-4">Ma</span
           ><span class="color-5">tr</span><span class="color-6">ix</span>
         </h1>
-        <div class="settings"></div>
+        <div id="settings">
+          <div class="beam"></div>
+          <div class="beam"></div>
+          <div class="beam"></div>
+        </div>
       </header>
 
       <main class="content">
         <div class="interface">
           <button type="button" id="min" disabled>
-            <svg
-              id="min-icon"
-              style="width: 24px; height: 24px"
-              viewBox="0 0 24 24"
-            >
+            <svg style="width: 24px; height: 24px" viewBox="0 0 24 24">
               <path
                 fill="currentColor"
                 d="M18.41,7.41L17,6L11,12L17,18L18.41,16.59L13.83,12L18.41,7.41M12.41,7.41L11,6L5,12L11,18L12.41,16.59L7.83,12L12.41,7.41Z"
@@ -41,21 +41,13 @@
             </svg>
           </button>
           <button type="button" id="decreaseLevel" disabled>
-            <svg
-              id="minus-icon"
-              style="width: 24px; height: 24px"
-              viewBox="0 0 24 24"
-            >
+            <svg style="width: 24px; height: 24px" viewBox="0 0 24 24">
               <path fill="currentColor" d="M19,13H5V11H19V13Z" />
             </svg>
           </button>
           <div id="displayLevel"></div>
           <button type="button" id="increaseLevel" disabled>
-            <svg
-              id="plus-icon"
-              style="width: 24px; height: 24px"
-              viewBox="0 0 24 24"
-            >
+            <svg style="width: 24px; height: 24px" viewBox="0 0 24 24">
               <path
                 fill="currentColor"
                 d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
@@ -63,11 +55,7 @@
             </svg>
           </button>
           <button type="button" id="max" disabled>
-            <svg
-              id="max-icon"
-              style="width: 24px; height: 24px"
-              viewBox="0 0 24 24"
-            >
+            <svg style="width: 24px; height: 24px" viewBox="0 0 24 24">
               <path
                 fill="currentColor"
                 d="M5.59,7.41L7,6L13,12L7,18L5.59,16.59L10.17,12L5.59,7.41M11.59,7.41L13,6L19,12L13,18L11.59,16.59L16.17,12L11.59,7.41Z"
@@ -77,14 +65,31 @@
         </div>
         <div id="status-bar"></div>
         <div id="matrix"></div>
-        <button type="button" id="next" disabled>Start</button>
+        <button type="button" id="next" class="unselectable" disabled>
+          Start
+        </button>
       </main>
 
       <footer class="footer">
         <div>
-          designed by <span class="developer">Demydovych Hryhorii</span>
+          <span class="unselectable">designed by </span
+          ><span class="developer">Demydovych Hryhorii</span>
         </div>
       </footer>
+    </div>
+
+    <div class="backdrop is-hidden" data-backdrop>
+      <div class="modal">
+        <button class="close-modal" data-close-modal>
+          <svg style="width: 24px; height: 24px" viewBox="0 0 24 24">
+            <path
+              id="close-modal-icon"
+              fill="#AAA"
+              d="M20 6.91L17.09 4L12 9.09L6.91 4L4 6.91L9.09 12L4 17.09L6.91 20L12 14.91L17.09 20L20 17.09L14.91 12L20 6.91Z"
+            />
+          </svg>
+        </button>
+      </div>
     </div>
 
     <script defer type="module" src="./main.js"></script>
