@@ -1,10 +1,12 @@
 import colors from './js/colors.js';
 import levels from './js/levels.js';
+import difficulty from './js/difficulty.js';
 import sizes from './js/sizes.js';
 
 const consoleLog = '1'; // console.log messages NO ('') or YES ('1')
 
 const refs = {
+  page: document.querySelector('.page'),
   status: document.getElementById('status-bar'),
   matrix: document.getElementById('matrix'),
   next: document.getElementById('next'),
@@ -13,34 +15,38 @@ const refs = {
   increase: document.getElementById('increaseLevel'),
   min: document.getElementById('min'),
   max: document.getElementById('max'),
+  about: document.querySelector('.logo'),
   settings: document.getElementById('settings'),
-  backdrop: document.querySelector('[data-backdrop]'),
-  closeModal: document.querySelector('[data-close-modal]'),
+  backdropAbout: document.querySelector('[data-backdrop-about]'),
+  backdropSettings: document.querySelector('[data-backdrop-settings]'),
+  closeAbout: document.querySelector('[data-close-about]'),
+  closeSettings: document.querySelector('[data-close-settings]'),
+  aboutOkBtn: document.getElementById('about-ok'),
+  saveSettingsBtn: document.getElementById('save-settings'),
+  antiCheatBox: document.getElementById('anti-cheat'),
+  quadSizePreview: document.querySelector('.quad-size-preview'),
+  themeToggle: document.getElementById('theme-toggle'),
+  difficultyRange: document.getElementById('difficulty-range'),
+  sizeRange: document.getElementById('size-range'),
 };
 
-let curLev = localStorage.getItem('level')
-  ? JSON.parse(localStorage.getItem('level'))
-  : 1;
-
-storageLevel();
-
-refs.level.innerHTML = curLev;
-
+refs.about.addEventListener('click', toggleModalAbout);
+refs.settings.addEventListener('click', toggleModalSettings);
 refs.min.addEventListener('click', levelMin);
 refs.max.addEventListener('click', levelMax);
 refs.decrease.addEventListener('click', levelDecrease);
 refs.increase.addEventListener('click', levelIncrease);
 refs.next.addEventListener('click', newGame);
 
-// Difficulty hard = 400, medium = 600, easy = 800
-// FROM SETTINGS default easy
-const msPerQuad = 400;
+const userSettings = JSON.parse(localStorage.getItem('MeMtrx'));
+let curLev = userSettings ? userSettings.level : 1;
+let antiCheat = userSettings ? userSettings.antiCheat : 0;
+let theme = userSettings ? userSettings.theme : 0;
+let msPerQuad = userSettings ? userSettings.msPerQuad : 200; //800
+let quadSize = userSettings ? userSettings.quadSize : sizes[2];
+storage();
 
-// FROM SETTINGS default medium
-const quadSize = sizes[2];
-
-// FROM SETTINGS default 0
-const antiCheat = 0;
+refs.level.innerHTML = curLev;
 
 let game,
   clicksCount,
@@ -115,7 +121,7 @@ function levelMin() {
   curLev = 1;
   game.level = curLev;
   updateLevelDisplay();
-  storageLevel();
+  storage();
   updateGameObj();
   drawEmptyField();
 }
@@ -129,7 +135,7 @@ function levelMax() {
   }
   curLev = levels.length;
   updateLevelDisplay();
-  storageLevel();
+  storage();
   updateGameObj();
   drawEmptyField();
 }
@@ -143,7 +149,7 @@ function levelDecrease() {
   }
   curLev -= 1;
   updateLevelDisplay();
-  storageLevel();
+  storage();
   updateGameObj();
   drawEmptyField();
 }
@@ -157,13 +163,23 @@ function levelIncrease() {
   }
   curLev += 1;
   updateLevelDisplay();
-  storageLevel();
+  storage();
   updateGameObj();
   drawEmptyField();
 }
 
-function storageLevel() {
-  localStorage.setItem('level', curLev);
+function storage() {
+  localStorage.setItem(
+    'MeMtrx',
+    JSON.stringify({
+      level: curLev,
+      antiCheat: antiCheat,
+      theme: theme,
+      msPerQuad: msPerQuad,
+      quadSize: quadSize,
+    }),
+  );
+  // console.table(JSON.parse(localStorage.getItem('MeMtrx'))); //DELETE
 }
 
 function updateLevelDisplay() {
@@ -308,6 +324,11 @@ function cursorToggle() {
     if (consoleLog) {
       console.log('ANTI-CHEAT CURSOR TOGGLE');
     }
+    if (!refs.page.style.cursor) {
+      refs.page.style.cursor = 'wait';
+    } else {
+      refs.page.style.cursor = null;
+    }
     if (!refs.matrix.style.cursor) {
       refs.matrix.style.cursor = 'none';
     } else {
@@ -317,6 +338,8 @@ function cursorToggle() {
 }
 
 function buttonsOn() {
+  refs.about.classList.remove('unclickable');
+  refs.settings.classList.remove('unclickable');
   refs.min.disabled = false;
   refs.decrease.disabled = false;
   refs.increase.disabled = false;
@@ -325,6 +348,8 @@ function buttonsOn() {
 }
 
 function buttonsOff() {
+  refs.about.classList.add('unclickable');
+  refs.settings.classList.add('unclickable');
   refs.min.disabled = true;
   refs.decrease.disabled = true;
   refs.increase.disabled = true;
@@ -351,16 +376,187 @@ data-type="marked" - filled quad
 data-clicked="clicked" - any quad that was clicked
 missed - class with styles
 
+quadSize default medium (40px, 50px, 60px, 70px, 80px)
+Difficulty default easy (wild = 200ms, hard = 400ms, medium = 600ms, easy = 800ms)
+
 newGame() > drawEmptyField() > renderField(game) > drawFigure() > clearFigure() > startClicking() > quadMarking() >
 cleanStatusQuad() > stopClicking() > showResult()
 */
 
-refs.settings.addEventListener('click', toggleModal);
-refs.closeModal.addEventListener('click', toggleModal);
+// toggleModalAbout
+// if contains then add listeners
+// if not remove listeners
+refs.closeAbout.addEventListener('click', toggleModalAbout);
+refs.aboutOkBtn.addEventListener('click', toggleModalAbout);
+// add keydownESC & click out / remove keydownESC & click out
+// data-backdrop-about event.target
 
-function toggleModal() {
+// toggleModalSettings
+// if contains then add listeners
+// if not remove listeners
+refs.closeSettings.addEventListener('click', toggleModalSettings);
+refs.saveSettingsBtn.addEventListener('click', saveSettings);
+// add keydownESC & click out / remove keydownESC & click out
+
+function toggleModalAbout() {
   if (consoleLog) {
-    console.log(`SETTINGS`);
+    console.log('ABOUT');
   }
-  refs.backdrop.classList.toggle('is-hidden');
+  refs.backdropAbout.classList.toggle('is-hidden');
+  // if elemName.classList.contains('className')
 }
+
+function toggleModalSettings() {
+  if (consoleLog) {
+    console.log('SETTINGS');
+  }
+  refs.backdropSettings.classList.toggle('is-hidden');
+}
+
+function saveSettings() {
+  console.log('SAVE');
+  // TODO: save settings in json and update all
+  toggleModalSettings();
+}
+
+/////////////////////////////////////////////////////////
+
+refs.antiCheatBox.addEventListener('click', antiCheatChange);
+function antiCheatChange() {
+  console.log(refs.antiCheatBox.checked, 'ANTI-CHEAT TOGGLE');
+  console.log(this);
+}
+
+refs.themeToggle.addEventListener('click', themeToggleChange);
+function themeToggleChange() {
+  console.log(refs.themeToggle.checked, 'THEME TOGGLE');
+  console.log(this);
+}
+
+refs.difficultyRange.addEventListener('change', event => {
+  console.log('DIFFICULTY', refs.difficultyRange.value);
+});
+// { name: 'wild', ms: 200 }
+// difficulty.name.toUpperCase()
+
+refs.sizeRange.addEventListener('change', sizeRangeChange);
+
+function sizeRangeChange() {
+  console.log(
+    'SIZE',
+    this.value,
+    capitalize(sizes[this.value].class),
+  );
+
+  sizes.forEach(element =>
+    refs.quadSizePreview.classList.remove(element.class),
+  );
+  refs.quadSizePreview.classList.add(sizes[this.value].class);
+}
+
+function capitalize(string) {
+  const array = string.split('');
+  return array.shift().toUpperCase() + array.join('');
+}
+
+// fn updateQuadSizePreview
+// take first preview in modal from range.value
+// QuadSize = JSON or 'standart'
+// range value = QuadSize and then => Preview in modal
+
+// refactoring Event Listeners -
+// create functions add modal event listeners and remove them when modal is closed
+
+// keydown	все клавиши - символьные и служебные
+// event.key	символ
+// event.code	код
+// event.keyCode	номер
+
+// key:
+// code:Space
+// keyCode:32
+
+// key:Enter
+// code:Enter
+// keyCode:13
+
+// key:Escape
+// code:Escape
+// keyCode:27
+
+// window.addEventListener('keydown', showStat);
+// function showStat(event) {
+//   refs.key.textContent = event.key;
+//   refs.code.textContent = event.code;
+//   refs.keyCode.textContent = event.keyCode;
+// }
+
+// window.addEventListener('click', event => {
+//   if (event.target === refs.backdropAbout) {
+//     console.log('close modal');
+//   }
+// });
+
+// window.addEventListener('keydown', event => {
+//   if (event.code === 'Escape') {
+//     console.log('close modal');
+//   }
+// });
+
+/*
+
+Anti-Cheat Cursor (checkbox) (change color of prop-name)
+Difficulty (range) Easy Medium Hard Wild
+Theme (toggle) Light Dark
+Color: (pallette) Random Fixed
+Size (range with preview) Tiny Small Standart Large Giant
+---------------------------------------------------------
+
+модальное окно	1:10:14	[HTML22] М5-9. Позиционированные элементы
+бургер	1:41:00	[HTML22] М8-15. Адаптивная вёрстка. Часть 1
+скроллинг модалки	0:07:00	[HTML22] М8-15. Адаптивная вёрстка. Часть 2
+скроллинг модалки	1:00:10	[HTML22] М8-15. Адаптивная вёрстка. Часть 2
+
+// ESC, clickBackdrop, close button
+
+// Settings
+Difficulty(msPerQuad): wild 200ms; hard 400ms; medium 600ms; easy 800ms;
+Cursor(antiCheat): anti-cheat;
+Color:  random (default)
+Size(quadSize):   tiny 40x40
+        small 50x50
+        medium 60x60
+        large 70x70
+        giant 80x80
+Theme:  default light, dark, cyber
+
+preview quad size
+
+https://www.youtube.com/watch?v=D90Y7TFsuZ4&list=PLdM4CqvCBocZjoYdCGTyPAvBj1NSHd646&index=129&t=14s
+
+https://www.youtube.com/watch?v=b_Ph0Yzatk4&list=PLdM4CqvCBocZjoYdCGTyPAvBj1NSHd646&index=176&t=208s
+
+// Theme:  default light, dark, cyber
+https://www.youtube.com/watch?v=0etPzM0bl4E&list=PLdM4CqvCBocZjoYdCGTyPAvBj1NSHd646&index=159&t=8s
+
+// Alternative field:
+random field rotate 90 (3x8 or 8x3)
+object properties enable-disable and true-false
+game.rotate: {enable, true}
+
+// SCORE: 0
+// SERIES: 4
+
+// Extra levels
+more than 20
+enabled-disabled in settings
+
+Choose level and click on the Start Game button to start!
+
+// Drop Menu https://www.youtube.com/watch?v=bC6vOWWNoas
+
+// css vendor prefixes
+// Mobile Tab Desktop
+
+// Сервер бэкапов
+*/

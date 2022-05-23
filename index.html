@@ -73,14 +73,14 @@
       <footer class="footer">
         <div>
           <span class="unselectable">designed by </span
-          ><span class="developer">Demydovych Hryhorii</span>
+          ><span class="developer">Hryhorii Demydovych</span>
         </div>
       </footer>
     </div>
 
-    <div class="backdrop is-hidden" data-backdrop>
+    <div class="backdrop is-hidden" data-backdrop-about>
       <div class="modal">
-        <button class="close-modal" data-close-modal>
+        <button class="close-modal" data-close-about>
           <svg style="width: 24px; height: 24px" viewBox="0 0 24 24">
             <path
               id="close-modal-icon"
@@ -89,6 +89,70 @@
             />
           </svg>
         </button>
+        <section class="text-about">
+          <p class="text">Hi!</p>
+          <p class="text">My name is Hryhorii Demydovych</p>
+          <p class="text">
+            I live in Ukraine and
+            <span class="br">I am a JavaScript Developer</span>
+          </p>
+        </section>
+        <button id="about-ok">Ok!</button>
+      </div>
+    </div>
+
+    <div class="backdrop is-hidden" data-backdrop-settings>
+      <div class="modal">
+        <button class="close-modal" data-close-settings>
+          <svg style="width: 24px; height: 24px" viewBox="0 0 24 24">
+            <path
+              id="close-modal-icon"
+              fill="#AAA"
+              d="M20 6.91L17.09 4L12 9.09L6.91 4L4 6.91L9.09 12L4 17.09L6.91 20L12 14.91L17.09 20L20 17.09L14.91 12L20 6.91Z"
+            />
+          </svg>
+        </button>
+        <div class="property-row">
+          <span class="property-name">Anti-Cheat</span>
+          <span class="property-output">Disabled</span>
+          <input type="checkbox" class="property-toggle" id="anti-cheat" />
+        </div>
+        <div class="property-row">
+          <span class="property-name">Theme</span>
+          <span class="property-output">Light</span>
+          <label class="switch property-toggle">
+            <input type="checkbox" id="theme-toggle" />
+            <span class="round"></span>
+          </label>
+        </div>
+        <div class="property-row">
+          <span class="property-name">Difficulty</span>
+          <span class="property-output">Easy</span
+          ><input
+            type="range"
+            id="difficulty-range"
+            name="difficulty-range"
+            class="property-toggle"
+            min="0"
+            max="3"
+            value="0"
+          />
+        </div>
+        <div class="property-row">
+          <span class="property-name">Size</span>
+          <span class="property-output">Standart</span>
+          <input
+            type="range"
+            id="size-range"
+            name="size-range"
+            class="property-toggle"
+            min="0"
+            max="4"
+            value="2"
+          />
+        </div>
+        <div class="quad-size-preview quad giant"></div>
+        <button id="save-settings">Save</button>
       </div>
     </div>
 
