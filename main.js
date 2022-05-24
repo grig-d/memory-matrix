@@ -442,13 +442,15 @@ refs.difficultyRange.addEventListener('change', event => {
 refs.sizeRange.addEventListener('change', sizeRangeChange);
 
 function sizeRangeChange() {
-  console.log(
-    'SIZE',
-    this.value,
-    capitalize(sizes[this.value].class),
-  );
+  const index = this.value;
+  console.log('SIZE', index, capitalize(sizes[index].class));
 
   sizes.forEach(element =>
+    // element.dataset.quad = 'class-name';
+    // html data-type="empty"
+    // document.getElementById(el).dataset.type = 'marked';
+    // currentQuad.dataset.state = 'clicked';
+    // urrentQuad.removeAttribute('data-state');
     refs.quadSizePreview.classList.remove(element.class),
   );
   refs.quadSizePreview.classList.add(sizes[this.value].class);
