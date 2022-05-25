@@ -27,7 +27,9 @@ const refs = {
   quadSizePreview: document.querySelector('.quad-size-preview'),
   themeToggle: document.getElementById('theme-toggle'),
   difficultyRange: document.getElementById('difficulty-range'),
+  difficultyLabel: document.getElementById('difficulty-label'),
   sizeRange: document.getElementById('size-range'),
+  sizeLabel: document.getElementById('size-label'),
 };
 
 refs.about.addEventListener('click', toggleModalAbout);
@@ -45,6 +47,9 @@ let theme = userSettings ? userSettings.theme : 0;
 let msPerQuad = userSettings ? userSettings.msPerQuad : 200; //800
 let quadSize = userSettings ? userSettings.quadSize : sizes[2];
 storage();
+
+difficultyRangeUpdate; // TODO: object, not msPerQuad like quadSize: {class: "medium", px: 60}
+quadSizePreviewUpdate(quadSize);
 
 refs.level.innerHTML = curLev;
 
@@ -416,6 +421,12 @@ function toggleModalSettings() {
 function saveSettings() {
   console.log('SAVE');
   // TODO: save settings in json and update all
+  // take info from all fields in modal and then storage();
+  // level: curLev,
+  // antiCheat: antiCheat,
+  // theme: theme,
+  // msPerQuad: msPerQuad,
+  // quadSize: quadSize,
   toggleModalSettings();
 }
 
@@ -433,38 +444,43 @@ function themeToggleChange() {
   console.log(this);
 }
 
-refs.difficultyRange.addEventListener('change', event => {
-  console.log('DIFFICULTY', refs.difficultyRange.value);
-});
-// { name: 'wild', ms: 200 }
-// difficulty.name.toUpperCase()
+refs.difficultyRange.addEventListener('change', difficultyRangeOnChange);
 
-refs.sizeRange.addEventListener('change', sizeRangeChange);
-
-function sizeRangeChange() {
+function difficultyRangeOnChange() {
   const index = this.value;
-  console.log('SIZE', index, capitalize(sizes[index].class));
-
-  sizes.forEach(element =>
-    // element.dataset.quad = 'class-name';
-    // html data-type="empty"
-    // document.getElementById(el).dataset.type = 'marked';
-    // currentQuad.dataset.state = 'clicked';
-    // urrentQuad.removeAttribute('data-state');
-    refs.quadSizePreview.classList.remove(element.class),
-  );
-  refs.quadSizePreview.classList.add(sizes[this.value].class);
+  const newDifficulty = difficulty[index];
+  difficultyRangeUpdate(newDifficulty);
 }
+
+function difficultyRangeUpdate(difficulty) {
+  refs.difficultyLabel.textContent = capitalize(difficulty.name);
+}
+
+//=====================================================================================
+refs.sizeRange.addEventListener('change', sizeRangeOnChange);
+
+function sizeRangeOnChange() {
+  const index = this.value;
+  const newSize = sizes[index];
+  quadSizePreviewUpdate(newSize);
+}
+
+function quadSizePreviewUpdate(size) {
+  refs.sizeLabel.textContent = capitalize(size.class);
+  const oldDataSize = refs.quadSizePreview.dataset.size;
+  refs.quadSizePreview.classList.remove(oldDataSize);
+  refs.quadSizePreview.dataset.size = size.class;
+  refs.quadSizePreview.classList.add(size.class);
+}
+
+// fn closeSettingNoSave - ESC X and clickOnBackdrop
+// update all settings from storage
+//=====================================================================================
 
 function capitalize(string) {
   const array = string.split('');
   return array.shift().toUpperCase() + array.join('');
 }
-
-// fn updateQuadSizePreview
-// take first preview in modal from range.value
-// QuadSize = JSON or 'standart'
-// range value = QuadSize and then => Preview in modal
 
 // refactoring Event Listeners -
 // create functions add modal event listeners and remove them when modal is closed
