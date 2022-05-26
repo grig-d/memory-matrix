@@ -32,8 +32,8 @@ const refs = {
   sizeLabel: document.getElementById('size-label'),
 };
 
-refs.about.addEventListener('click', toggleModalAbout);
-refs.settings.addEventListener('click', toggleModalSettings);
+refs.about.addEventListener('click', openModalAbout);
+refs.settings.addEventListener('click', openModalSettings);
 refs.min.addEventListener('click', levelMin);
 refs.max.addEventListener('click', levelMax);
 refs.decrease.addEventListener('click', levelDecrease);
@@ -44,11 +44,11 @@ const userSettings = JSON.parse(localStorage.getItem('MeMtrx'));
 let curLev = userSettings ? userSettings.level : 1;
 let antiCheat = userSettings ? userSettings.antiCheat : 0;
 let theme = userSettings ? userSettings.theme : 0;
-let msPerQuad = userSettings ? userSettings.msPerQuad : 200; //800
-let quadSize = userSettings ? userSettings.quadSize : sizes[2];
+let curDif = userSettings ? userSettings.curDif : difficulty[0];
+let quadSize = userSettings ? userSettings.quadSize : sizes[0];
 storage();
 
-difficultyRangeUpdate; // TODO: object, not msPerQuad like quadSize: {class: "medium", px: 60}
+difficultyRangeUpdate(curDif);
 quadSizePreviewUpdate(quadSize);
 
 refs.level.innerHTML = curLev;
@@ -180,7 +180,7 @@ function storage() {
       level: curLev,
       antiCheat: antiCheat,
       theme: theme,
-      msPerQuad: msPerQuad,
+      curDif: curDif,
       quadSize: quadSize,
     }),
   );
@@ -203,7 +203,7 @@ function newGame() {
   }
   drawEmptyField();
   drawFigure();
-  setTimeout(clearFigure, game.quads * msPerQuad);
+  setTimeout(clearFigure, game.quads * curDif.ms); //
 }
 
 function drawEmptyField() {
@@ -381,56 +381,82 @@ data-type="marked" - filled quad
 data-clicked="clicked" - any quad that was clicked
 missed - class with styles
 
-quadSize default medium (40px, 50px, 60px, 70px, 80px)
+Quad Size default medium (40px, 50px, 60px, 70px, 80px)
 Difficulty default easy (wild = 200ms, hard = 400ms, medium = 600ms, easy = 800ms)
 
 newGame() > drawEmptyField() > renderField(game) > drawFigure() > clearFigure() > startClicking() > quadMarking() >
 cleanStatusQuad() > stopClicking() > showResult()
 */
 
-// toggleModalAbout
-// if contains then add listeners
-// if not remove listeners
-refs.closeAbout.addEventListener('click', toggleModalAbout);
-refs.aboutOkBtn.addEventListener('click', toggleModalAbout);
-// add keydownESC & click out / remove keydownESC & click out
-// data-backdrop-about event.target
-
-// toggleModalSettings
-// if contains then add listeners
-// if not remove listeners
-refs.closeSettings.addEventListener('click', toggleModalSettings);
-refs.saveSettingsBtn.addEventListener('click', saveSettings);
-// add keydownESC & click out / remove keydownESC & click out
-
-function toggleModalAbout() {
-  if (consoleLog) {
-    console.log('ABOUT');
-  }
-  refs.backdropAbout.classList.toggle('is-hidden');
-  // if elemName.classList.contains('className')
+function openModalAbout() {
+  refs.backdropAbout.classList.remove('is-hidden');
+  refs.closeAbout.addEventListener('click', closeModalAbout);
+  refs.aboutOkBtn.addEventListener('click', closeModalAbout);
+  refs.backdropAbout.addEventListener('click', closeModalAboutByBackdrop);
+  window.addEventListener('keydown', closeModalAboutByEscape);
 }
 
-function toggleModalSettings() {
-  if (consoleLog) {
-    console.log('SETTINGS');
+function closeModalAbout() {
+  refs.closeAbout.removeEventListener('click', closeModalAbout);
+  refs.aboutOkBtn.removeEventListener('click', closeModalAbout);
+  refs.backdropAbout.removeEventListener('click', closeModalAboutByBackdrop);
+  window.removeEventListener('keydown', closeModalAboutByEscape);
+  refs.backdropAbout.classList.add('is-hidden');
+}
+
+function closeModalAboutByBackdrop(event) {
+  console.log(event.target); //DELETE
+  if (event.target === refs.backdropAbout) {
+    closeModalAbout();
   }
-  refs.backdropSettings.classList.toggle('is-hidden');
+}
+
+function closeModalAboutByEscape(event) {
+  console.log(event.code); //DELETE
+  if (event.code === 'Escape') {
+    closeModalAbout();
+  }
+}
+
+//=======================================================================================
+function openModalSettings() {
+  console.log('OPEN MODAL SETTINGS');
+  toggleModalSettings();
+  // update from local
+  // TODO: add listeners
+  // toggleModalSettings
+  // if contains then add listeners
+  // if not
+  refs.closeSettings.addEventListener('click', toggleModalSettings);
+  refs.saveSettingsBtn.addEventListener('click', saveSettings);
+  // add keydownESC & click out / remove keydownESC & click out
+}
+
+function closeModalSettings() {
+  // remove listeners
 }
 
 function saveSettings() {
-  console.log('SAVE');
+  console.log('SAVE SETTINGS');
   // TODO: save settings in json and update all
   // take info from all fields in modal and then storage();
   // level: curLev,
   // antiCheat: antiCheat,
   // theme: theme,
-  // msPerQuad: msPerQuad,
+  // curDif: curDif,
   // quadSize: quadSize,
   toggleModalSettings();
 }
 
-/////////////////////////////////////////////////////////
+function toggleModalSettings() {
+  console.log('TOGGLE MODAL SETTINGS');
+  refs.backdropSettings.classList.toggle('is-hidden');
+}
+
+// difficultyRangeUpdate(fromLocal)
+// quadSizePreviewUpdate(fromLocal)
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
 
 refs.antiCheatBox.addEventListener('click', antiCheatChange);
 function antiCheatChange() {
@@ -452,11 +478,14 @@ function difficultyRangeOnChange() {
   difficultyRangeUpdate(newDifficulty);
 }
 
-function difficultyRangeUpdate(difficulty) {
-  refs.difficultyLabel.textContent = capitalize(difficulty.name);
+function difficultyRangeUpdate(newDifficulty) {
+  refs.difficultyLabel.textContent = capitalize(newDifficulty.name);
+  const index = difficulty.findIndex(object => {
+    return object.name === newDifficulty.name;
+  });
+  refs.difficultyRange.value = index;
 }
 
-//=====================================================================================
 refs.sizeRange.addEventListener('change', sizeRangeOnChange);
 
 function sizeRangeOnChange() {
@@ -465,12 +494,16 @@ function sizeRangeOnChange() {
   quadSizePreviewUpdate(newSize);
 }
 
-function quadSizePreviewUpdate(size) {
-  refs.sizeLabel.textContent = capitalize(size.class);
+function quadSizePreviewUpdate(newSize) {
+  refs.sizeLabel.textContent = capitalize(newSize.class);
+  const index = sizes.findIndex(object => {
+    return object.class === newSize.class;
+  });
+  refs.sizeRange.value = index;
   const oldDataSize = refs.quadSizePreview.dataset.size;
   refs.quadSizePreview.classList.remove(oldDataSize);
-  refs.quadSizePreview.dataset.size = size.class;
-  refs.quadSizePreview.classList.add(size.class);
+  refs.quadSizePreview.dataset.size = newSize.class;
+  refs.quadSizePreview.classList.add(newSize.class);
 }
 
 // fn closeSettingNoSave - ESC X and clickOnBackdrop
@@ -481,45 +514,6 @@ function capitalize(string) {
   const array = string.split('');
   return array.shift().toUpperCase() + array.join('');
 }
-
-// refactoring Event Listeners -
-// create functions add modal event listeners and remove them when modal is closed
-
-// keydown	все клавиши - символьные и служебные
-// event.key	символ
-// event.code	код
-// event.keyCode	номер
-
-// key:
-// code:Space
-// keyCode:32
-
-// key:Enter
-// code:Enter
-// keyCode:13
-
-// key:Escape
-// code:Escape
-// keyCode:27
-
-// window.addEventListener('keydown', showStat);
-// function showStat(event) {
-//   refs.key.textContent = event.key;
-//   refs.code.textContent = event.code;
-//   refs.keyCode.textContent = event.keyCode;
-// }
-
-// window.addEventListener('click', event => {
-//   if (event.target === refs.backdropAbout) {
-//     console.log('close modal');
-//   }
-// });
-
-// window.addEventListener('keydown', event => {
-//   if (event.code === 'Escape') {
-//     console.log('close modal');
-//   }
-// });
 
 /*
 
@@ -538,7 +532,7 @@ Size (range with preview) Tiny Small Standart Large Giant
 // ESC, clickBackdrop, close button
 
 // Settings
-Difficulty(msPerQuad): wild 200ms; hard 400ms; medium 600ms; easy 800ms;
+Difficulty(curDif): wild 200ms; hard 400ms; medium 600ms; easy 800ms;
 Cursor(antiCheat): anti-cheat;
 Color:  random (default)
 Size(quadSize):   tiny 40x40
