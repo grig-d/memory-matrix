@@ -40,13 +40,23 @@ refs.decrease.addEventListener('click', levelDecrease);
 refs.increase.addEventListener('click', levelIncrease);
 refs.next.addEventListener('click', newGame);
 
+//
 const userSettings = JSON.parse(localStorage.getItem('MeMtrx'));
+console.log(userSettings);
+
 let curLev = userSettings ? userSettings.level : 1;
 let antiCheat = userSettings ? userSettings.antiCheat : 0;
 let theme = userSettings ? userSettings.theme : 0;
 let curDif = userSettings ? userSettings.curDif : difficulty[0];
 let quadSize = userSettings ? userSettings.quadSize : sizes[0];
 storage();
+
+// console.log(userSettings.hasOwnProperty('level'));
+// console.log(userSettings.hasOwnProperty('antiCheat'));
+// console.log(userSettings.hasOwnProperty('theme'));
+// console.log(userSettings.hasOwnProperty('curDif'));
+// console.log(userSettings.hasOwnProperty('quadSize'));
+//
 
 difficultyRangeUpdate(curDif);
 quadSizePreviewUpdate(quadSize);
@@ -184,7 +194,7 @@ function storage() {
       quadSize: quadSize,
     }),
   );
-  // console.table(JSON.parse(localStorage.getItem('MeMtrx'))); //DELETE
+  console.table(JSON.parse(localStorage.getItem('MeMtrx'))); //DELETE
 }
 
 function updateLevelDisplay() {
@@ -419,21 +429,49 @@ function closeModalAboutByEscape(event) {
 }
 
 //=======================================================================================
+// refs.antiCheatBox.addEventListener / remove
+// refs.themeToggle.addEventListener / remove
+// refs.difficultyRange.addEventListener / remove
+// refs.sizeRange.addEventListener / remove
+
 function openModalSettings() {
-  console.log('OPEN MODAL SETTINGS');
-  toggleModalSettings();
-  // update from local
-  // TODO: add listeners
-  // toggleModalSettings
-  // if contains then add listeners
-  // if not
-  refs.closeSettings.addEventListener('click', toggleModalSettings);
+  refs.backdropSettings.classList.remove('is-hidden');
+  refs.closeSettings.addEventListener('click', closeModalSettings);
   refs.saveSettingsBtn.addEventListener('click', saveSettings);
-  // add keydownESC & click out / remove keydownESC & click out
+  refs.backdropSettings.addEventListener('click', closeModalSettingsByBackdrop);
+  window.addEventListener('keydown', closeModalSettingsByEscape);
+  // refs.antiCheatBox.addEventListener
+  // refs.themeToggle.addEventListener
+  // refs.difficultyRange.addEventListener
+  // refs.sizeRange.addEventListener
+  // update from local
 }
 
 function closeModalSettings() {
+  refs.closeSettings.removeEventListener('click', closeModalSettings);
+  refs.saveSettingsBtn.removeEventListener('click', saveSettings);
+  refs.backdropSettings.removeEventListener(
+    'click',
+    closeModalSettingsByBackdrop,
+  );
+  window.removeEventListener('keydown', closeModalSettingsByEscape);
   // remove listeners
+  refs.backdropSettings.classList.add('is-hidden');
+  // restore? from local if not saving
+}
+
+function closeModalSettingsByBackdrop(event) {
+  console.log(event.target); //DELETE
+  if (event.target === refs.backdropSettings) {
+    closeModalSettings();
+  }
+}
+
+function closeModalSettingsByEscape(event) {
+  console.log(event.code); //DELETE
+  if (event.code === 'Escape') {
+    closeModalSettings();
+  }
 }
 
 function saveSettings() {
@@ -445,12 +483,7 @@ function saveSettings() {
   // theme: theme,
   // curDif: curDif,
   // quadSize: quadSize,
-  toggleModalSettings();
-}
-
-function toggleModalSettings() {
-  console.log('TOGGLE MODAL SETTINGS');
-  refs.backdropSettings.classList.toggle('is-hidden');
+  closeModalSettings();
 }
 
 // difficultyRangeUpdate(fromLocal)
@@ -530,6 +563,7 @@ Size (range with preview) Tiny Small Standart Large Giant
 скроллинг модалки	1:00:10	[HTML22] М8-15. Адаптивная вёрстка. Часть 2
 
 // ESC, clickBackdrop, close button
+// global ESC - quit game
 
 // Settings
 Difficulty(curDif): wild 200ms; hard 400ms; medium 600ms; easy 800ms;
