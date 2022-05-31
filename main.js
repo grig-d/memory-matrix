@@ -429,10 +429,10 @@ function closeModalAboutByEscape(event) {
 }
 
 //=======================================================================================
-// refs.antiCheatBox.addEventListener / remove
-// refs.themeToggle.addEventListener / remove
-// refs.difficultyRange.addEventListener / remove
-// refs.sizeRange.addEventListener / remove
+// refs.antiCheatBox.removeEventListener
+// refs.themeToggle.removeEventListener
+// refs.difficultyRange.removeEventListener
+// refs.sizeRange.removeEventListener
 
 function openModalSettings() {
   refs.backdropSettings.classList.remove('is-hidden');
@@ -605,4 +605,7 @@ Choose level and click on the Start Game button to start!
 // Mobile Tab Desktop
 
 // Сервер бэкапов
+
+preloader and theme
+https://www.youtube.com/watch?v=kyoTYFTLm8A
 */
