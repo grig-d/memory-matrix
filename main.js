@@ -42,14 +42,19 @@ refs.next.addEventListener('click', newGame);
 
 //
 const userSettings = JSON.parse(localStorage.getItem('MeMtrx'));
-console.log(userSettings);
+// console.log(userSettings);
+// console.log(!!(userSettings && true));
 
-let curLev = userSettings ? userSettings.level : 1;
+// let curLev = userSettings ? userSettings.level : 1;
+let curLev =
+  userSettings && userSettings.hasOwnProperty('level') ? userSettings.level : 1;
 let antiCheat = userSettings ? userSettings.antiCheat : 0;
 let theme = userSettings ? userSettings.theme : 0;
 let curDif = userSettings ? userSettings.curDif : difficulty[0];
 let quadSize = userSettings ? userSettings.quadSize : sizes[0];
 storage();
+
+console.log(curLev);
 
 // console.log(userSettings.hasOwnProperty('level'));
 // console.log(userSettings.hasOwnProperty('antiCheat'));
@@ -608,4 +613,18 @@ Choose level and click on the Start Game button to start!
 
 preloader and theme
 https://www.youtube.com/watch?v=kyoTYFTLm8A
+
+// progressBar
+<div class="progressBar" title="Progress bar">
+<div class="currentProgress currentProgress--start" 
+data-bind="{
+css: (status() === 0 ? 'currentProgress--pause' : 'currentProgress--start'), 
+style: { width: completedRatio() * 100 + '%'}
+}" 
+style="width: 79.446%;">
+<span class="timeAfter" data-bind="text: completedRatio() === 1 ? '(not started)' : completedRatio() === 0 ? '(done)' : ''">
+</span>
+</div>
+</div>
+
 */
