@@ -3,7 +3,8 @@ import levels from './js/levels.js';
 import difficulty from './js/difficulty.js';
 import sizes from './js/sizes.js';
 
-const consoleLog = '1'; // console.log messages NO ('') or YES ('1')
+//// console.log messages NO ('') or YES ('1')
+const consoleLog = '1';
 
 const refs = {
   page: document.querySelector('.page'),
@@ -24,12 +25,14 @@ const refs = {
   aboutOkBtn: document.getElementById('about-ok'),
   saveSettingsBtn: document.getElementById('save-settings'),
   antiCheatBox: document.getElementById('anti-cheat'),
-  quadSizePreview: document.querySelector('.quad-size-preview'),
+  antiCheatLabel: document.getElementById('anti-cheat-label'),
   themeToggle: document.getElementById('theme-toggle'),
+  themeToggleLabel: document.getElementById('theme-toggle-label'),
   difficultyRange: document.getElementById('difficulty-range'),
   difficultyLabel: document.getElementById('difficulty-label'),
   sizeRange: document.getElementById('size-range'),
   sizeLabel: document.getElementById('size-label'),
+  quadSizePreview: document.querySelector('.quad-size-preview'),
 };
 
 refs.about.addEventListener('click', openModalAbout);
@@ -40,29 +43,31 @@ refs.decrease.addEventListener('click', levelDecrease);
 refs.increase.addEventListener('click', levelIncrease);
 refs.next.addEventListener('click', newGame);
 
-//
 const userSettings = JSON.parse(localStorage.getItem('MeMtrx'));
-// console.log(userSettings);
-// console.log(!!(userSettings && true));
 
-// let curLev = userSettings ? userSettings.level : 1;
+//// Quad Size default medium (40px, 50px, 60px, 70px, 80px)
+//// Difficulty default easy (wild = 200ms, hard = 400ms, medium = 600ms, easy = 800ms)
 let curLev =
   userSettings && userSettings.hasOwnProperty('level') ? userSettings.level : 1;
-let antiCheat = userSettings ? userSettings.antiCheat : 0;
-let theme = userSettings ? userSettings.theme : 0;
-let curDif = userSettings ? userSettings.curDif : difficulty[0];
-let quadSize = userSettings ? userSettings.quadSize : sizes[0];
+let antiCheat =
+  userSettings && userSettings.hasOwnProperty('antiCheat')
+    ? userSettings.antiCheat
+    : 0;
+let theme =
+  userSettings && userSettings.hasOwnProperty('theme') ? userSettings.theme : 0;
+let curDif =
+  userSettings && userSettings.hasOwnProperty('curDif')
+    ? userSettings.curDif
+    : difficulty[0];
+let quadSize =
+  userSettings && userSettings.hasOwnProperty('quadSize')
+    ? userSettings.quadSize
+    : sizes[2];
 storage();
 
-console.log(curLev);
-
-// console.log(userSettings.hasOwnProperty('level'));
-// console.log(userSettings.hasOwnProperty('antiCheat'));
-// console.log(userSettings.hasOwnProperty('theme'));
-// console.log(userSettings.hasOwnProperty('curDif'));
-// console.log(userSettings.hasOwnProperty('quadSize'));
-//
-
+//// Modal Properties Output Update
+// antiCheat Update
+// theme Update
 difficultyRangeUpdate(curDif);
 quadSizePreviewUpdate(quadSize);
 
@@ -199,7 +204,6 @@ function storage() {
       quadSize: quadSize,
     }),
   );
-  console.table(JSON.parse(localStorage.getItem('MeMtrx'))); //DELETE
 }
 
 function updateLevelDisplay() {
@@ -388,21 +392,6 @@ function undoStatusQuad() {
   currentStatusQuad.style.backgroundColor = game.color;
 }
 
-/*
-DOCS:
-
-data-type="empty" - empty quad
-data-type="marked" - filled quad
-data-clicked="clicked" - any quad that was clicked
-missed - class with styles
-
-Quad Size default medium (40px, 50px, 60px, 70px, 80px)
-Difficulty default easy (wild = 200ms, hard = 400ms, medium = 600ms, easy = 800ms)
-
-newGame() > drawEmptyField() > renderField(game) > drawFigure() > clearFigure() > startClicking() > quadMarking() >
-cleanStatusQuad() > stopClicking() > showResult()
-*/
-
 function openModalAbout() {
   refs.backdropAbout.classList.remove('is-hidden');
   refs.closeAbout.addEventListener('click', closeModalAbout);
@@ -412,32 +401,36 @@ function openModalAbout() {
 }
 
 function closeModalAbout() {
+  refs.backdropAbout.classList.add('is-hidden');
   refs.closeAbout.removeEventListener('click', closeModalAbout);
   refs.aboutOkBtn.removeEventListener('click', closeModalAbout);
   refs.backdropAbout.removeEventListener('click', closeModalAboutByBackdrop);
   window.removeEventListener('keydown', closeModalAboutByEscape);
-  refs.backdropAbout.classList.add('is-hidden');
 }
 
 function closeModalAboutByBackdrop(event) {
-  console.log(event.target); //DELETE
   if (event.target === refs.backdropAbout) {
     closeModalAbout();
   }
 }
 
 function closeModalAboutByEscape(event) {
-  console.log(event.code); //DELETE
   if (event.code === 'Escape') {
     closeModalAbout();
   }
 }
 
-//=======================================================================================
-// refs.antiCheatBox.removeEventListener
-// refs.themeToggle.removeEventListener
-// refs.difficultyRange.removeEventListener
-// refs.sizeRange.removeEventListener
+/*
+DOCS:
+
+data-type="empty" - empty quad
+data-type="marked" - filled quad
+data-clicked="clicked" - any quad that was clicked
+missed - class with styles
+
+newGame() > drawEmptyField() > renderField(game) > drawFigure() > clearFigure() > startClicking() > quadMarking() >
+cleanStatusQuad() > stopClicking() > showResult()
+*/
 
 function openModalSettings() {
   refs.backdropSettings.classList.remove('is-hidden');
@@ -445,14 +438,15 @@ function openModalSettings() {
   refs.saveSettingsBtn.addEventListener('click', saveSettings);
   refs.backdropSettings.addEventListener('click', closeModalSettingsByBackdrop);
   window.addEventListener('keydown', closeModalSettingsByEscape);
-  // refs.antiCheatBox.addEventListener
-  // refs.themeToggle.addEventListener
-  // refs.difficultyRange.addEventListener
-  // refs.sizeRange.addEventListener
+  refs.antiCheatBox.addEventListener('click', antiCheatOnChange);
+  refs.themeToggle.addEventListener('click', themeToggleOnChange);
+  refs.difficultyRange.addEventListener('change', difficultyRangeOnChange);
+  refs.sizeRange.addEventListener('change', sizeRangeOnChange);
   // update from local
 }
 
 function closeModalSettings() {
+  refs.backdropSettings.classList.add('is-hidden');
   refs.closeSettings.removeEventListener('click', closeModalSettings);
   refs.saveSettingsBtn.removeEventListener('click', saveSettings);
   refs.backdropSettings.removeEventListener(
@@ -460,20 +454,20 @@ function closeModalSettings() {
     closeModalSettingsByBackdrop,
   );
   window.removeEventListener('keydown', closeModalSettingsByEscape);
-  // remove listeners
-  refs.backdropSettings.classList.add('is-hidden');
+  refs.antiCheatBox.removeEventListener('click', antiCheatOnChange);
+  refs.themeToggle.removeEventListener('click', themeToggleOnChange);
+  refs.difficultyRange.removeEventListener('change', difficultyRangeOnChange);
+  refs.sizeRange.removeEventListener('change', sizeRangeOnChange);
   // restore? from local if not saving
 }
 
 function closeModalSettingsByBackdrop(event) {
-  console.log(event.target); //DELETE
   if (event.target === refs.backdropSettings) {
     closeModalSettings();
   }
 }
 
 function closeModalSettingsByEscape(event) {
-  console.log(event.code); //DELETE
   if (event.code === 'Escape') {
     closeModalSettings();
   }
@@ -496,19 +490,14 @@ function saveSettings() {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
-refs.antiCheatBox.addEventListener('click', antiCheatChange);
-function antiCheatChange() {
-  console.log(refs.antiCheatBox.checked, 'ANTI-CHEAT TOGGLE');
-  console.log(this);
+function antiCheatOnChange() {
+  refs.antiCheatLabel.textContent = this.checked ? 'Enabled' : 'Disabled';
 }
 
-refs.themeToggle.addEventListener('click', themeToggleChange);
-function themeToggleChange() {
-  console.log(refs.themeToggle.checked, 'THEME TOGGLE');
-  console.log(this);
+function themeToggleOnChange() {
+  refs.themeToggleLabel.textContent = this.checked ? 'Dark' : 'Light';
+  // themeUpdate() need to do and on close modal again update
 }
-
-refs.difficultyRange.addEventListener('change', difficultyRangeOnChange);
 
 function difficultyRangeOnChange() {
   const index = this.value;
@@ -523,8 +512,6 @@ function difficultyRangeUpdate(newDifficulty) {
   });
   refs.difficultyRange.value = index;
 }
-
-refs.sizeRange.addEventListener('change', sizeRangeOnChange);
 
 function sizeRangeOnChange() {
   const index = this.value;
