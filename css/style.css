@@ -3,6 +3,29 @@
   --switch-color-dark: #fff;
 }
 
+body.light {
+  --body-bg: #f5f4fa;
+  --color-light: #888;
+  --color-dark: #fff;
+}
+
+body.dark {
+  /* 
+  header #1f1f1f
+  header text #cfcfcf #dcdcdc
+  body back - #121212
+  play card back #1d1d1d
+  play card textSecondary #8e8e8e
+  play card textMain #e6e6e6
+
+
+
+  */
+  --body-bg: #1d1d1d;
+  --color-light: #888;
+  --color-dark: #fff;
+}
+
 .colors {
   background-color: #da4453; /* grapefruit-main */
   background-color: #ed5565; /* grapefruit-light-1 */
@@ -56,7 +79,7 @@ html {
 
 body {
   margin: 0;
-  background: #f5f4fa;
+  background-color: var(--body-bg);
 }
 
 img {
@@ -77,6 +100,11 @@ a {
   min-height: 100vh; /* sticky footer */
 }
 
+/* SEX 
+background-color = --header-bg
+color = --header-text
+box-shadow = --header-shadow
+*/
 .header,
 .footer {
   background-color: #fafafa;
