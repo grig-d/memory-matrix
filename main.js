@@ -65,11 +65,7 @@ let quadSize =
     : sizes[2];
 storage();
 
-//// Modal Properties Output Update
-// antiCheat Update
-// theme Update
-difficultyRangeUpdate(curDif);
-quadSizePreviewUpdate(quadSize);
+modalSettingsUpdateFromLocal();
 
 refs.level.innerHTML = curLev;
 
@@ -206,6 +202,17 @@ function storage() {
   );
 }
 
+// TODO:
+function modalSettingsUpdateFromLocal() {
+  const userSettings = JSON.parse(localStorage.getItem('MeMtrx'));
+  console.log('modalSettingsUpdateFromLocal: ', userSettings.antiCheat);
+  console.log('modalSettingsUpdateFromLocal: ', userSettings.theme);
+  // antiCheat Update
+  // theme Update
+  difficultyRangeUpdate(userSettings.curDif);
+  quadSizePreviewUpdate(userSettings.quadSize);
+}
+
 function updateLevelDisplay() {
   refs.level.innerHTML = curLev;
 }
@@ -218,7 +225,7 @@ function newGame() {
   game.color = randomize(colors);
   game.figure = figureBuild(levels[curLev - 1]);
   if (consoleLog) {
-    console.log('NEW GAME * * *');
+    console.log('* * * NEW GAME');
   }
   drawEmptyField();
   drawFigure();
@@ -442,7 +449,7 @@ function openModalSettings() {
   refs.themeToggle.addEventListener('click', themeToggleOnChange);
   refs.difficultyRange.addEventListener('change', difficultyRangeOnChange);
   refs.sizeRange.addEventListener('change', sizeRangeOnChange);
-  // update from local
+  modalSettingsUpdateFromLocal(); //// Update from local
 }
 
 function closeModalSettings() {
@@ -458,7 +465,6 @@ function closeModalSettings() {
   refs.themeToggle.removeEventListener('click', themeToggleOnChange);
   refs.difficultyRange.removeEventListener('change', difficultyRangeOnChange);
   refs.sizeRange.removeEventListener('change', sizeRangeOnChange);
-  // restore? from local if not saving
 }
 
 function closeModalSettingsByBackdrop(event) {
@@ -541,12 +547,7 @@ function capitalize(string) {
 }
 
 /*
-
-Anti-Cheat Cursor (checkbox) (change color of prop-name)
-Difficulty (range) Easy Medium Hard Wild
-Theme (toggle) Light Dark
 Color: (pallette) Random Fixed
-Size (range with preview) Tiny Small Standart Large Giant
 ---------------------------------------------------------
 
 модальное окно	1:10:14	[HTML22] М5-9. Позиционированные элементы
